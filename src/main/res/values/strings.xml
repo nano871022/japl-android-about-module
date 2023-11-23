@@ -15,6 +15,7 @@
 
     <string name="urtss"><![CDATA[U.R. Torres <br/>San Sebastian]]></string>
     <string name="fiances">Finanzas Personales</string>
+    <string name="url_app_uralameda181"><![CDATA[https://play.google.com/store/apps/details?id=co.com.alameda181.unidadresidencialalameda181&pcampaignid=web_share]]></string>
     <string name="url_app_urtss"><![CDATA[https://play.google.com/store/apps/details?id=co.japl.android.torressansebastian&pcampaignid=web_share]]></string>
     <string name="url_app_finance"><![CDATA[https://play.google.com/store/apps/details?id=co.japl.android.myapplication&pcampaignid=web_share]]></string>
     <string name="url_app_github"><![CDATA[https://github.com/nano871022]]></string>
