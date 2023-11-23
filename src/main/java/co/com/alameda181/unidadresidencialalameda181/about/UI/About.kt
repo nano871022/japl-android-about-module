@@ -5,6 +5,7 @@ import android.net.Uri
 import android.text.method.LinkMovementMethod
 import android.widget.TextView
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -35,6 +36,8 @@ import co.com.jap.ui.theme.MaterialThemeComposeUI
 
 @Composable
 fun About(versionDetail:String){
+        val linkGP = stringResource(id = R.string.url_app_uralameda181)
+        val context = LocalContext.current
         Column (
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.Start
@@ -44,12 +47,24 @@ fun About(versionDetail:String){
                         .padding(top = 15.dp, start = 5.dp, end = 5.dp)
         ){
                 Row() {
-                        Image(
-                                painter = painterResource(id = R.drawable.urtorressansebastian),
-                                contentDescription = stringResource(id = R.string.name),
-                                contentScale = ContentScale.FillBounds,
-                                modifier = Modifier.width(110.dp).height(130.dp).padding(top=5.dp)
-                        )
+                        Column {
+                                Image(
+                                    painter = painterResource(id = R.drawable.urtorressansebastian),
+                                    contentDescription = stringResource(id = R.string.name),
+                                    contentScale = ContentScale.FillBounds,
+                                    modifier = Modifier.width(110.dp).height(130.dp).padding(top=5.dp)
+                                )
+                                Image(
+                                        painter = painterResource(id = R.drawable.googleplay)
+                                        , contentDescription = "Google Play"
+                                        ,modifier = Modifier.width(150.dp).clickable {
+                                                val uri = Uri.parse(linkGP)
+                                                val intent = Intent(Intent.ACTION_VIEW, uri)
+                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                                context.startActivity(intent)
+                                        }
+                                )
+                        }
 
                         Text(stringResource(id = R.string.description),modifier=Modifier.padding(start=10.dp))
 
