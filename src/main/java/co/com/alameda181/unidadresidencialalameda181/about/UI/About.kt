@@ -36,7 +36,7 @@ import co.com.jap.ui.theme.MaterialThemeComposeUI
 
 @Composable
 fun About(versionDetail:String){
-        val linkGP = stringResource(id = R.string.url_app_uralameda181)
+        val linkGP = stringResource(id = R.string.url_app_urtss)
         val context = LocalContext.current
         Column (
                 verticalArrangement = Arrangement.Top,
@@ -57,7 +57,7 @@ fun About(versionDetail:String){
                                 Image(
                                         painter = painterResource(id = R.drawable.googleplay)
                                         , contentDescription = "Google Play"
-                                        ,modifier = Modifier.width(150.dp).clickable {
+                                        ,modifier = Modifier.width(110.dp).clickable {
                                                 val uri = Uri.parse(linkGP)
                                                 val intent = Intent(Intent.ACTION_VIEW, uri)
                                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
