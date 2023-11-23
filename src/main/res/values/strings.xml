@@ -9,14 +9,15 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="name">Unidad Residencial Alameda 181</string>
-    <string name="description">Está aplicacion es realizada para los residentes de la Unidad Residencial Alameda 181 para que tengan toda la información de reglas de la unidad e información de la administración</string>
-    <string name="copy_right">CopyRight © 2023-2023 UR Alameda181</string>
+    <string name="name">UR Alameda 181</string>
+    <string name="description">Está aplicacion es realizada para los residentes de Torres San sebastian para que tengan toda la información de reglas de la unidad e información de la administración</string>
+    <string name="copy_right">CopyRight © 2022-2023 Torres San Sebastian</string>
 
     <string name="urtss"><![CDATA[U.R. Torres <br/>San Sebastian]]></string>
     <string name="fiances">Finanzas Personales</string>
     <string name="url_app_uralameda181"><![CDATA[https://play.google.com/store/apps/details?id=co.com.alameda181.unidadresidencialalameda181&pcampaignid=web_share]]></string>
     <string name="url_app_urtss"><![CDATA[https://play.google.com/store/apps/details?id=co.japl.android.torressansebastian&pcampaignid=web_share]]></string>
+    <string name="url_app_uralameda181"><![CDATA[https://play.google.com/store/apps/details?id=co.com.alameda181.unidadresidencialalameda181&pcampaignid=web_share]]></string>
     <string name="url_app_finance"><![CDATA[https://play.google.com/store/apps/details?id=co.japl.android.myapplication&pcampaignid=web_share]]></string>
     <string name="url_app_github"><![CDATA[https://github.com/nano871022]]></string>
     <string name="url_app_linkedin"><![CDATA[https://www.linkedin.com/in/ing-alejo-parra/]]></string>
