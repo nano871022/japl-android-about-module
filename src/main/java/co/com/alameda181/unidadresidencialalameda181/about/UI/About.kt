@@ -30,8 +30,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.text.HtmlCompat
-import co.com.alameda181.ui.theme.theme.MaterialThemeComposeUI
 import co.com.alameda181.unidadresidencialalameda181.about.R
+import co.com.jap.ui.theme.MaterialThemeComposeUI
 
 @Composable
 fun About(versionDetail:String){
@@ -45,10 +45,10 @@ fun About(versionDetail:String){
         ){
                 Row() {
                         Image(
-                                painter = painterResource(id = R.drawable.img),
+                                painter = painterResource(id = R.drawable.urtorressansebastian),
                                 contentDescription = stringResource(id = R.string.name),
                                 contentScale = ContentScale.FillBounds,
-                                modifier = Modifier.width(150.dp).height(130.dp).padding(top=5.dp)
+                                modifier = Modifier.width(110.dp).height(130.dp).padding(top=5.dp)
                         )
 
                         Text(stringResource(id = R.string.description),modifier=Modifier.padding(start=10.dp))
@@ -72,7 +72,8 @@ fun AppBrothers(){
         Divider(modifier=Modifier.padding(10.dp))
 
         Row() {
-                CardTorres()
+                CardUnidadResidencial()
+
                 CardFinanzas()
 
         }
@@ -82,10 +83,10 @@ fun AppBrothers(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CardTorres(){
+fun CardUnidadResidencial(){
         val context = LocalContext.current.applicationContext
-        val url = stringResource(id = R.string.url_app_urtss)
-        val name = stringResource(id = R.string.urtss)
+        val url = stringResource(id = R.string.url_app_uralameda181)
+        val name = stringResource(id = R.string.name)
         val nameFormat = remember { HtmlCompat.fromHtml(name, HtmlCompat.FROM_HTML_MODE_COMPACT)}
         Card(
                 onClick = {
@@ -100,10 +101,10 @@ fun CardTorres(){
                         .padding(5.dp)
         ) {
 
-                Image(painter= painterResource(id = R.drawable.urtorressansebastian),contentDescription = stringResource(
-                        id = R.string.urtss
-                ),
-                        Modifier
+                Image(painter= painterResource(id = R.drawable.img),contentDescription = stringResource(
+                        id = R.string.name
+                ), contentScale = ContentScale.FillBounds,
+                       modifier= Modifier.width(140.dp).height(90.dp)
                                 .align(
                                         alignment = Alignment.CenterHorizontally
                                 ))
