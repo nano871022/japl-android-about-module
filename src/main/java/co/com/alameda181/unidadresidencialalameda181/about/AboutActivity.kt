@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.rememberNavController
 import co.com.alameda181.unidadresidencialalameda181.about.UI.About
-import co.com.jap.ui.theme.MaterialThemeComposeUI
+import co.com.japl.ui.theme.MaterialThemeComposeUI
 
 class AboutActivity : AppCompatActivity() {
 
