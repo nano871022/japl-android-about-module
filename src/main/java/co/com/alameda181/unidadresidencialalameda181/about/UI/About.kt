@@ -9,7 +9,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -120,11 +119,12 @@ fun CardTorres(){
                         context.startActivity(intent)
                 },
                 modifier = Modifier
-                        .width(100.dp)
+                        .width(120.dp)
                         .padding(5.dp)
         ) {
 
-                Image(painter= painterResource(id = R.drawable.urtorressansebastian),contentDescription = stringResource(
+                Image(painter= painterResource(id = R.drawable.torressansebastian_logo)
+                        ,contentDescription = stringResource(
                         id = R.string.urtss
                 ),
                         Modifier
@@ -181,16 +181,17 @@ fun CardOwn(){
         val context = LocalContext.current.applicationContext
         val urlGit = stringResource(id = R.string.url_app_github)
         val urlLinkedIn = stringResource(id = R.string.url_app_linkedin)
+        val urlGooglePlay = stringResource(id = R.string.url_app_googleplay)
         val txt = stringResource(R.string.own_detail)
         val html = remember { HtmlCompat.fromHtml(txt, HtmlCompat.FROM_HTML_MODE_COMPACT)}
         Card(modifier=Modifier.padding(10.dp)){
 
                 Row {
 
-                        Image(painter= painterResource(id = R.drawable.person_hack),
+                        Image(painter= painterResource(id = R.drawable.design),
                                 contentDescription = stringResource(
                                         id = R.string.fiances
-                                ))
+                                ),modifier=Modifier.width(150.dp))
 
                         AndroidView(
                                 factory = {
@@ -234,6 +235,24 @@ fun CardOwn(){
                                 .padding(start = 10.dp)) {
                                 Image(
                                         painter = painterResource(id = R.drawable.linkedin2),
+                                        contentDescription = stringResource(
+                                                id = R.string.own_detail
+                                        )
+                                )
+                        }
+
+                        IconButton(onClick = {
+                                val link = urlGooglePlay
+                                val uri = Uri.parse(link)
+                                val intent = Intent(Intent.ACTION_VIEW, uri)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                context.startActivity(intent)
+                        }, modifier = Modifier
+                                .width(100.dp)
+                                .height(100.dp)
+                                .padding(start = 10.dp)) {
+                                Image(
+                                        painter = painterResource(id = R.drawable.googleplay),
                                         contentDescription = stringResource(
                                                 id = R.string.own_detail
                                         )
