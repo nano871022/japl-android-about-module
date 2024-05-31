@@ -7,8 +7,9 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.rememberNavController
+import co.com.alameda181.ui.theme.theme.MaterialThemeComposeUI
 import co.com.alameda181.unidadresidencialalameda181.about.UI.About
-import co.com.japl.ui.theme.MaterialThemeComposeUI
+
 
 class AboutActivity : AppCompatActivity() {
 
