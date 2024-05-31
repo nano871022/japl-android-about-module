@@ -173,16 +173,17 @@ fun CardOwn(){
         val context = LocalContext.current.applicationContext
         val urlGit = stringResource(id = R.string.url_app_github)
         val urlLinkedIn = stringResource(id = R.string.url_app_linkedin)
+        val urlGooglePlay = stringResource(id = R.string.url_app_googleplay)
         val txt = stringResource(R.string.own_detail)
         val html = remember { HtmlCompat.fromHtml(txt, HtmlCompat.FROM_HTML_MODE_COMPACT)}
         Card(modifier=Modifier.padding(10.dp)){
 
                 Row {
 
-                        Image(painter= painterResource(id = R.drawable.person_hack),
+                        Image(painter= painterResource(id = R.drawable.design),
                                 contentDescription = stringResource(
                                         id = R.string.fiances
-                                ))
+                                ),modifier=Modifier.width(150.dp))
 
                         AndroidView(
                                 factory = {
@@ -203,7 +204,9 @@ fun CardOwn(){
                                 val intent = Intent(Intent.ACTION_VIEW, uri)
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                                 context.startActivity(intent)
-                        }, modifier = Modifier.width(100.dp).height(100.dp)) {
+                        }, modifier = Modifier
+                                .width(100.dp)
+                                .height(100.dp)) {
                                 Image(
                                         painter = painterResource(id = R.drawable.github_logo),
                                         contentDescription = stringResource(
@@ -218,9 +221,30 @@ fun CardOwn(){
                                 val intent = Intent(Intent.ACTION_VIEW, uri)
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                                 context.startActivity(intent)
-                        }, modifier = Modifier.width(100.dp).height(100.dp).padding(start=10.dp)) {
+                        }, modifier = Modifier
+                                .width(100.dp)
+                                .height(100.dp)
+                                .padding(start = 10.dp)) {
                                 Image(
                                         painter = painterResource(id = R.drawable.linkedin2),
+                                        contentDescription = stringResource(
+                                                id = R.string.own_detail
+                                        )
+                                )
+                        }
+
+                        IconButton(onClick = {
+                                val link = urlGooglePlay
+                                val uri = Uri.parse(link)
+                                val intent = Intent(Intent.ACTION_VIEW, uri)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                context.startActivity(intent)
+                        }, modifier = Modifier
+                                .width(100.dp)
+                                .height(100.dp)
+                                .padding(start = 10.dp)) {
+                                Image(
+                                        painter = painterResource(id = R.drawable.googleplay),
                                         contentDescription = stringResource(
                                                 id = R.string.own_detail
                                         )
