@@ -18,11 +18,13 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -103,6 +105,7 @@ fun CardTorres(){
         val url = stringResource(id = R.string.url_app_urtss)
         val name = stringResource(id = R.string.urtss)
         val nameFormat = remember { HtmlCompat.fromHtml(name, HtmlCompat.FROM_HTML_MODE_COMPACT)}
+        val textColor = MaterialTheme.colorScheme.primary.toArgb()
         Card(
                 onClick = {
                         val link = url
@@ -127,7 +130,10 @@ fun CardTorres(){
 
                 AndroidView(
                         factory= {TextView(it)},
-                        update = { it.text = nameFormat },
+                        update = {
+                                it.text = nameFormat
+                                it.setTextColor(textColor)
+                                 },
                         modifier = Modifier
                                 .align(
                                         alignment = Alignment.CenterHorizontally
@@ -176,6 +182,7 @@ fun CardOwn(){
         val urlGooglePlay = stringResource(id = R.string.url_app_googleplay)
         val txt = stringResource(R.string.own_detail)
         val html = remember { HtmlCompat.fromHtml(txt, HtmlCompat.FROM_HTML_MODE_COMPACT)}
+        val textColor = MaterialTheme.colorScheme.primary.toArgb()
         Card(modifier=Modifier.padding(10.dp)){
 
                 Row {
@@ -191,8 +198,10 @@ fun CardOwn(){
                                                 movementMethod = LinkMovementMethod.getInstance()
                                         }
                                 },
-                                update = { it.text = html },
-                                modifier = Modifier.padding(20.dp)
+                                update = { it.text = html
+                                         it.setTextColor(textColor)},
+                                modifier = Modifier.padding(20.dp),
+
                         )
                 }
 
