@@ -2,8 +2,10 @@ package co.com.alameda181.unidadresidencialalameda181.about.UI
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.text.method.LinkMovementMethod
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -117,7 +119,7 @@ fun CardTorres(){
                         .padding(5.dp)
         ) {
 
-                Image(painter= painterResource(id = R.drawable.urtorressansebastian),contentDescription = stringResource(
+                Image(painter= painterResource(id = R.drawable.torressansebastian_logo),contentDescription = stringResource(
                         id = R.string.urtss
                 ), contentScale = ContentScale.FillBounds,
                        modifier= Modifier.width(140.dp).height(90.dp)
@@ -255,6 +257,7 @@ fun CardOwn(){
         }
 }
 
+@RequiresApi(Build.VERSION_CODES.S)
 @Preview(showBackground = true)
 @Composable
 fun preview(){
