@@ -9,11 +9,12 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -31,8 +32,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.text.HtmlCompat
-import co.com.japl.ui.theme.MaterialThemeComposeUI
 import co.com.alameda181.unidadresidencialalameda181.about.R
+import co.com.japl.ui.theme.MaterialThemeComposeUI
 
 @Composable
 fun About(versionDetail:String){
@@ -50,10 +51,7 @@ fun About(versionDetail:String){
                                         painter = painterResource(id = R.drawable.finanzaspersonales),
                                         contentDescription = stringResource(id = R.string.fiances),
                                         contentScale = ContentScale.FillBounds,
-                                        modifier = Modifier
-                                                .width(150.dp)
-                                                .height(130.dp)
-                                                .padding(top = 5.dp)
+                                        modifier = Modifier.width(150.dp).height(130.dp).padding(top = 5.dp)
                                 )
                                 Image(
                                         painter = painterResource(id = R.drawable.googleplay)
@@ -69,19 +67,13 @@ fun About(versionDetail:String){
                                 )
                         }
 
-                        Text(stringResource(id = R.string.description)
-                                ,color= MaterialTheme.colorScheme.onPrimary
-                                ,modifier=Modifier.padding(start=10.dp))
+                        Text(stringResource(id = R.string.description),modifier=Modifier.padding(start=10.dp))
 
                 }
 
-                Text(text=versionDetail
-                        , color = MaterialTheme.colorScheme.onPrimary
-                        ,modifier = Modifier.padding(top = 20.dp, start=10.dp))
+                Text(text=versionDetail,modifier = Modifier.padding(top = 20.dp, start=10.dp))
 
-                Text(stringResource(id = R.string.copy_right)
-                        , color = MaterialTheme.colorScheme.onPrimary
-                        , modifier = Modifier
+                Text(stringResource(id = R.string.copy_right), modifier = Modifier
                                 .align(Alignment.End)
                                 .padding(top = 20.dp))
 
@@ -97,6 +89,7 @@ fun AppBrothers(){
 
         Row() {
                 CardTorres()
+                
                 CardFinanzas()
 
         }
@@ -126,8 +119,8 @@ fun CardTorres(){
 
                 Image(painter= painterResource(id = R.drawable.urtorressansebastian),contentDescription = stringResource(
                         id = R.string.urtss
-                ),
-                        Modifier
+                ), contentScale = ContentScale.FillBounds,
+                       modifier= Modifier.width(140.dp).height(90.dp)
                                 .align(
                                         alignment = Alignment.CenterHorizontally
                                 ))
@@ -156,19 +149,13 @@ fun CardFinanzas(){
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 context.startActivity(intent)
         },modifier = Modifier
-                .width(105.dp)
+                .width(115.dp)
                 .padding(5.dp)) {
 
                 Image(painter= painterResource(id = R.drawable.finanzaspersonales),
                         contentDescription = stringResource(
                         id = R.string.fiances
-                )
-                        , contentScale = ContentScale.FillBounds
-                        , modifier = Modifier
-                                .height(90.dp)
-                                .width(110.dp)
-                                .align(alignment = Alignment.CenterHorizontally)
-                        )
+                ), modifier = Modifier.align(alignment = Alignment.CenterHorizontally))
 
                 Divider(modifier=Modifier.padding(top=10.dp, bottom=10.dp))
 
