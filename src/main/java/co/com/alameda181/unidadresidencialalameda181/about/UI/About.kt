@@ -1,9 +1,12 @@
 package co.com.alameda181.unidadresidencialalameda181.about.UI
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.Uri
+import android.os.Build
 import android.text.method.LinkMovementMethod
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -18,12 +21,15 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -72,8 +78,8 @@ fun About(versionDetail:String){
                 Text(text=versionDetail,modifier = Modifier.padding(top = 20.dp, start=10.dp))
 
                 Text(stringResource(id = R.string.copy_right), modifier = Modifier
-                        .align(Alignment.End)
-                        .padding(top = 20.dp))
+                                .align(Alignment.End)
+                                .padding(top = 20.dp))
 
                 AppBrothers()
 
@@ -102,6 +108,7 @@ fun CardTorres(){
         val url = stringResource(id = R.string.url_app_urtss)
         val name = stringResource(id = R.string.urtss)
         val nameFormat = remember { HtmlCompat.fromHtml(name, HtmlCompat.FROM_HTML_MODE_COMPACT)}
+        val color = MaterialTheme.colorScheme.onSurface
         Card(
                 onClick = {
                         val link = url
@@ -115,7 +122,7 @@ fun CardTorres(){
                         .padding(5.dp)
         ) {
 
-                Image(painter= painterResource(id = R.drawable.urtorressansebastian),contentDescription = stringResource(
+                Image(painter= painterResource(id = R.drawable.torressansebastian_logo),contentDescription = stringResource(
                         id = R.string.urtss
                 ), contentScale = ContentScale.FillBounds,
                        modifier= Modifier.width(140.dp).height(90.dp)
@@ -125,13 +132,22 @@ fun CardTorres(){
                 Divider(modifier=Modifier.padding(top=10.dp, bottom=10.dp))
 
                 AndroidView(
-                        factory= {TextView(it)},
-                        update = { it.text = nameFormat },
+                        factory= {
+                                TextView(it).apply{
+
+                                }
+                                 },
+                        update = {
+                                it.text = nameFormat
+                                it.setTextColor(color.toArgb())
+                                 },
                         modifier = Modifier
                                 .align(
                                         alignment = Alignment.CenterHorizontally
                                 )
                                 .padding(5.dp))
+
+
         }
 }
 
@@ -175,6 +191,7 @@ fun CardOwn(){
         val urlGooglePlay = stringResource(id = R.string.url_app_googleplay)
         val txt = stringResource(R.string.own_detail)
         val html = remember { HtmlCompat.fromHtml(txt, HtmlCompat.FROM_HTML_MODE_COMPACT)}
+        val color = MaterialTheme.colorScheme.onSurface
         Card(modifier=Modifier.padding(10.dp)){
 
                 Row {
@@ -190,7 +207,9 @@ fun CardOwn(){
                                                 movementMethod = LinkMovementMethod.getInstance()
                                         }
                                 },
-                                update = { it.text = html },
+                                update = { it.text = html
+                                        it.setTextColor(color.toArgb())
+                                         },
                                 modifier = Modifier.padding(20.dp)
                         )
                 }
@@ -253,9 +272,19 @@ fun CardOwn(){
         }
 }
 
-@Preview(showBackground = true)
+@RequiresApi(Build.VERSION_CODES.S)
+@Preview( showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
 @Composable
 fun preview(){
+    MaterialThemeComposeUI {
+                About(versionDetail="V1.0.0 Primera version de la app")
+        }
+}
+
+@RequiresApi(Build.VERSION_CODES.S)
+@Preview( showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun previewDark(){
         MaterialThemeComposeUI {
                 About(versionDetail="V1.0.0 Primera version de la app")
         }
