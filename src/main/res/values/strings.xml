@@ -65,4 +65,7 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="url_app_googleplay">https://play.google.com/store/apps/dev?id=4892761986588217653</string>
+    <string name="website">Página Web App</string>
+    <string name="url_website">https://cralameda181.japl.dev/</string>
+    <string name="url_japl">https://www.japl.dev</string>
 </resources>

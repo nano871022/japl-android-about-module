@@ -18,10 +18,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -44,12 +44,16 @@ import co.com.japl.ui.theme.MaterialThemeComposeUI
 @Composable
 fun About(versionDetail:String){
         val linkGP = stringResource(id = R.string.url_app_uralameda181)
+        val linkWebSiteApp = stringResource(id = R.string.url_website)
         val context = LocalContext.current
+        val color = MaterialTheme.colorScheme.onBackground
+
         Column (
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.Start
                 , modifier = Modifier
-                        .fillMaxWidth().verticalScroll(rememberScrollState())
+                        .fillMaxWidth()
+                        .verticalScroll(rememberScrollState())
         ){
                 Row() {
                         Column {
@@ -57,29 +61,49 @@ fun About(versionDetail:String){
                                         painter = painterResource(id = R.drawable.img),
                                         contentDescription = stringResource(id = R.string.app_name),
                                         contentScale = ContentScale.FillBounds,
-                                        modifier = Modifier.width(150.dp).height(130.dp).padding(top = 5.dp)
+                                        modifier = Modifier
+                                                .width(150.dp)
+                                                .height(130.dp)
+                                                .padding(top = 5.dp)
                                 )
                                 Image(
                                         painter = painterResource(id = R.drawable.googleplay)
                                         , contentDescription = "Google Play"
-                                        ,modifier = Modifier.width(110.dp).clickable {
-                                                val uri = Uri.parse(linkGP)
-                                                val intent = Intent(Intent.ACTION_VIEW, uri)
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                                context.startActivity(intent)
-                                        }
+                                        ,modifier = Modifier
+                                                .width(110.dp)
+                                                .clickable {
+                                                        val uri = Uri.parse(linkGP)
+                                                        val intent = Intent(Intent.ACTION_VIEW, uri)
+                                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                                        context.startActivity(intent)
+                                                }
                                 )
+
+                                Button(onClick = {
+                                        val uri = Uri.parse(linkWebSiteApp)
+                                        val intent = Intent(Intent.ACTION_VIEW, uri)
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                        context.startActivity(intent)
+                                }){
+                                        Text(stringResource(id = R.string.website))
+                                }
                         }
 
-                        Text(stringResource(id = R.string.description),modifier=Modifier.padding(start=10.dp))
+                        Text(stringResource(id = R.string.description),
+                                color=color,
+                                modifier=Modifier.padding(start=10.dp))
 
                 }
 
-                Text(text=versionDetail,modifier = Modifier.padding(top = 20.dp, start=10.dp))
+                Text(text=versionDetail,
+                        color=color,
+                        modifier = Modifier.padding(top = 20.dp, start=10.dp))
 
-                Text(stringResource(id = R.string.copy_right), modifier = Modifier
-                                .align(Alignment.End)
-                                .padding(top = 20.dp))
+                Text(stringResource(id = R.string.copy_right),
+                        color = color,
+                        modifier = Modifier
+                        .align(Alignment.End)
+                        .padding(top = 20.dp))
 
                 AppBrothers()
 
@@ -125,10 +149,12 @@ fun CardTorres(){
                 Image(painter= painterResource(id = R.drawable.torressansebastian_logo),contentDescription = stringResource(
                         id = R.string.urtss
                 ), contentScale = ContentScale.FillBounds,
-                       modifier= Modifier.width(140.dp).height(90.dp)
-                                .align(
-                                        alignment = Alignment.CenterHorizontally
-                                ))
+                       modifier= Modifier
+                               .width(140.dp)
+                               .height(90.dp)
+                               .align(
+                                       alignment = Alignment.CenterHorizontally
+                               ))
                 Divider(modifier=Modifier.padding(top=10.dp, bottom=10.dp))
 
                 AndroidView(
@@ -187,6 +213,7 @@ fun CardFinanzas(){
 fun CardOwn(){
         val context = LocalContext.current.applicationContext
         val urlGit = stringResource(id = R.string.url_app_github)
+        val urlJAPL = stringResource(id = R.string.url_japl)
         val urlLinkedIn = stringResource(id = R.string.url_app_linkedin)
         val urlGooglePlay = stringResource(id = R.string.url_app_googleplay)
         val txt = stringResource(R.string.own_detail)
@@ -268,12 +295,26 @@ fun CardOwn(){
                                         )
                                 )
                         }
+
+                        IconButton(onClick = {
+                                val uri = Uri.parse(urlJAPL)
+                                val intent = Intent(Intent.ACTION_VIEW, uri)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                context.startActivity(intent)}, modifier = Modifier
+                                .width(100.dp)
+                                .height(100.dp)
+                                .padding(start = 10.dp)) {
+                                Image( painter = painterResource(id = R.drawable.icon_japl),
+                                        modifier = Modifier.width(40.dp).height(40.dp),
+                                        contentDescription = urlJAPL)
+                                
+                        }
                 }
         }
 }
 
 @RequiresApi(Build.VERSION_CODES.S)
-@Preview( showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
+@Preview( showSystemUi = true,  uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true, device = "id:pixel_5", backgroundColor = 0xFFFFFFFF)
 @Composable
 fun preview(){
     MaterialThemeComposeUI {
@@ -282,7 +323,7 @@ fun preview(){
 }
 
 @RequiresApi(Build.VERSION_CODES.S)
-@Preview( showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview( showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, device = "id:pixel_5", backgroundColor = 0xFF000000)
 @Composable
 fun previewDark(){
         MaterialThemeComposeUI {
