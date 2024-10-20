@@ -1,4 +1,4 @@
-package co.com.alameda181.unidadresidencialalameda181.about.UI
+package co.com.japl.homeconnect.about.UI
 
 import android.content.Intent
 import android.content.res.Configuration
@@ -38,7 +38,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.text.HtmlCompat
-import co.com.alameda181.unidadresidencialalameda181.about.R
+import co.com.japl.homeconnect.about.R
 import co.com.japl.ui.theme.MaterialThemeComposeUI
 
 @Composable

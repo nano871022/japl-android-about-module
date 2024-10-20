@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "co.com.alameda181.unidadresidencialalameda181.about"
+    namespace = "co.com.japl.homeconnect.about"
     compileSdk = 34
 
     defaultConfig {
