@@ -276,11 +276,12 @@ fun CardFinanzas(){
 
                 Divider(modifier=Modifier.padding(top=10.dp, bottom=10.dp))
 
-                Text(text = stringResource(id = R.string.fiances),modifier= Modifier
+                Text(text = stringResource(id = R.string.fiances),
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier= Modifier
                         .align(
                                 alignment = Alignment.CenterHorizontally
-                        )
-                        .padding(5.dp))
+                        ).padding(5.dp))
 
 
         }
