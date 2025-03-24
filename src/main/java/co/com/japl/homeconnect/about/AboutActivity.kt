@@ -17,7 +17,7 @@ class AboutActivity : AppCompatActivity() {
             val navController = rememberNavController()
             val context = LocalContext.current.applicationContext
             MaterialThemeComposeUI {
-                About("Module sin version")
+                About("Module sin version","torressansebastian")
             }
         }
     }
