@@ -42,7 +42,7 @@ import co.com.japl.homeconnect.about.R
 import co.com.japl.ui.theme.MaterialThemeComposeUI
 
 @Composable
-fun About(versionDetail:String){
+fun About(versionDetail:String,applicationId:String){
         val linkGP = stringResource(id = R.string.url_app_finance)
         val linkWebSiteApp = stringResource(id = R.string.url_website)
         val context = LocalContext.current
@@ -57,12 +57,34 @@ fun About(versionDetail:String){
         ){
                 Row() {
                         Column {
-                                Image(
-                                        painter = painterResource(id = R.drawable.finanzaspersonales),
-                                        contentDescription = stringResource(id = R.string.fiances),
-                                        contentScale = ContentScale.FillBounds,
-                                        modifier = Modifier.width(150.dp).height(130.dp).padding(top = 5.dp)
-                                )
+                                if(applicationId.lowercase().contains("finances")) {
+                                        Image(
+                                                painter = painterResource(id = R.drawable.finanzaspersonales),
+                                                contentDescription = stringResource(id = R.string.fiances),
+                                                contentScale = ContentScale.FillBounds,
+                                                modifier = Modifier.width(150.dp).height(130.dp)
+                                                        .padding(top = 5.dp)
+                                        )
+                                }
+                                if(applicationId.lowercase().contains("alameda181")) {
+                                        Image(
+                                                painter = painterResource(id = R.drawable.img),
+                                                contentDescription = stringResource(id = R.string.alameda181),
+                                                contentScale = ContentScale.FillBounds,
+                                                modifier = Modifier.width(150.dp).height(130.dp)
+                                                        .padding(top = 5.dp)
+                                        )
+                                }
+                                if(applicationId.lowercase().contains("torressansebastian")) {
+                                        Image(
+                                                painter = painterResource(id = R.drawable.torressansebastian_logo),
+                                                contentDescription = stringResource(id = R.string.urtss),
+                                                contentScale = ContentScale.FillBounds,
+                                                modifier = Modifier.width(110.dp).height(130.dp)
+                                                        .padding(top = 5.dp)
+                                        )
+                                }
+
                                 Image(
                                         painter = painterResource(id = R.drawable.googleplay)
                                         , contentDescription = "Google Play"
@@ -102,22 +124,26 @@ fun About(versionDetail:String){
                                 .align(Alignment.End)
                                 .padding(top = 20.dp))
 
-                AppBrothers()
+                AppBrothers(applicationId)
 
         }
 
 }
 
 @Composable
-fun AppBrothers(){
+fun AppBrothers(applicationId:String){
         Divider(modifier=Modifier.padding(10.dp))
 
         Row() {
-                CardTorres()
-                
-                //CardFinanzas()
-
-                CardCRAlameda181()
+                if(!applicationId.lowercase().contains("torressansebastian")){
+                        CardTorres()
+                }
+                if(!applicationId.lowercase().contains("finances")) {
+                        CardFinanzas()
+                }
+                if(!applicationId.lowercase().contains("alameda181")) {
+                        CardCRAlameda181()
+                }
 
         }
 
@@ -369,16 +395,50 @@ fun CardOwn(){
 @Composable
 fun preview(){
     MaterialThemeComposeUI {
-                About(versionDetail="V1.0.0 Primera version de la app")
+                About(versionDetail="V1.0.0 Primera version de la app",applicationId="torressansebastian")
         }
 }
 
 @RequiresApi(Build.VERSION_CODES.S)
-@Preview( showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview( showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, device = "id:pixel_5", backgroundColor = 0x00000000)
 @Composable
 fun previewDark(){
         MaterialThemeComposeUI {
-                About(versionDetail="V1.0.0 Primera version de la app")
+                About(versionDetail="V1.0.0 Primera version de la app",applicationId="torressansebastian")
+        }
+}
+@RequiresApi(Build.VERSION_CODES.S)
+@Preview( showSystemUi = true,  uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true, device = "id:pixel_5", backgroundColor = 0xFFFFFFFF)
+@Composable
+fun previewFinances(){
+        MaterialThemeComposeUI {
+                About(versionDetail="V1.0.0 Primera version de la app",applicationId="finances")
+        }
+}
+
+@RequiresApi(Build.VERSION_CODES.S)
+@Preview( showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, device = "id:pixel_5", backgroundColor = 0x00000000)
+@Composable
+fun previewDarkFinances(){
+        MaterialThemeComposeUI {
+                About(versionDetail="V1.0.0 Primera version de la app",applicationId="finances")
+        }
+}
+@RequiresApi(Build.VERSION_CODES.S)
+@Preview( showSystemUi = true,  uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true, device = "id:pixel_5", backgroundColor = 0xFFFFFFFF)
+@Composable
+fun previewAlameda181(){
+        MaterialThemeComposeUI {
+                About(versionDetail="V1.0.0 Primera version de la app",applicationId="unidadresidencialalameda181")
+        }
+}
+
+@RequiresApi(Build.VERSION_CODES.S)
+@Preview( showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, device = "id:pixel_5", backgroundColor = 0x00000000)
+@Composable
+fun previewDarkAlameda181(){
+        MaterialThemeComposeUI {
+                About(versionDetail="V1.0.0 Primera version de la app",applicationId="unidadresidencialalameda181")
         }
 }
 
