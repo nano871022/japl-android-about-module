@@ -57,7 +57,7 @@ fun About(versionDetail:String,applicationId:String){
         ){
                 Row() {
                         Column {
-                                if(applicationId.lowercase().contains("finances")) {
+                                if(applicationId.lowercase().contains("myapplication")) {
                                         Image(
                                                 painter = painterResource(id = R.drawable.finanzaspersonales),
                                                 contentDescription = stringResource(id = R.string.fiances),
@@ -138,7 +138,7 @@ fun AppBrothers(applicationId:String){
                 if(!applicationId.lowercase().contains("torressansebastian")){
                         CardTorres()
                 }
-                if(!applicationId.lowercase().contains("finances")) {
+                if(!applicationId.lowercase().contains("myapplication")) {
                         CardFinanzas()
                 }
                 if(!applicationId.lowercase().contains("alameda181")) {
@@ -413,7 +413,7 @@ fun previewDark(){
 @Composable
 fun previewFinances(){
         MaterialThemeComposeUI {
-                About(versionDetail="V1.0.0 Primera version de la app",applicationId="finances")
+                About(versionDetail="V1.0.0 Primera version de la app",applicationId="myapplication")
         }
 }
 
@@ -422,7 +422,7 @@ fun previewFinances(){
 @Composable
 fun previewDarkFinances(){
         MaterialThemeComposeUI {
-                About(versionDetail="V1.0.0 Primera version de la app",applicationId="finances")
+                About(versionDetail="V1.0.0 Primera version de la app",applicationId="myapplication")
         }
 }
 @RequiresApi(Build.VERSION_CODES.S)
