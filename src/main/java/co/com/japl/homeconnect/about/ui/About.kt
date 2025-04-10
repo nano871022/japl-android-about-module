@@ -6,7 +6,9 @@ import android.net.Uri
 import android.os.Build
 import android.text.method.LinkMovementMethod
 import android.widget.TextView
+import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
+import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -43,7 +45,7 @@ import co.com.japl.ui.theme.MaterialThemeComposeUI
 
 @Composable
 fun About(versionDetail:String,applicationId:String){
-        val linkGP = stringResource(id = R.string.url_app_finance)
+
         val linkWebSiteApp = stringResource(id = R.string.url_website)
         val context = LocalContext.current
         val color = MaterialTheme.colorScheme.onBackground
@@ -58,45 +60,28 @@ fun About(versionDetail:String,applicationId:String){
                 Row() {
                         Column {
                                 if(applicationId.lowercase().contains("myapplication")) {
-                                        Image(
-                                                painter = painterResource(id = R.drawable.finanzaspersonales),
-                                                contentDescription = stringResource(id = R.string.fiances),
-                                                contentScale = ContentScale.FillBounds,
-                                                modifier = Modifier.width(150.dp).height(130.dp)
-                                                        .padding(top = 5.dp)
-                                        )
+                                        Owner(logo = R.drawable.finanzaspersonales,
+                                                descriptionLogo = R.string.fiances,
+                                                link = stringResource(id = R.string.url_app_finance),
+                                                modifierLogo = Modifier.width(150.dp).height(130.dp)
+                                                        .padding(top = 5.dp))
                                 }
                                 if(applicationId.lowercase().contains("alameda181")) {
-                                        Image(
-                                                painter = painterResource(id = R.drawable.img),
-                                                contentDescription = stringResource(id = R.string.alameda181),
-                                                contentScale = ContentScale.FillBounds,
-                                                modifier = Modifier.width(150.dp).height(130.dp)
-                                                        .padding(top = 5.dp)
-                                        )
+                                        Owner(logo = R.drawable.img,
+                                                descriptionLogo = R.string.alameda181,
+                                                link = stringResource(id = R.string.url_app_uralameda181),
+                                                modifierLogo = Modifier.width(150.dp).height(130.dp)
+                                                        .padding(top = 5.dp))
                                 }
                                 if(applicationId.lowercase().contains("torressansebastian")) {
-                                        Image(
-                                                painter = painterResource(id = R.drawable.torressansebastian_logo),
-                                                contentDescription = stringResource(id = R.string.urtss),
-                                                contentScale = ContentScale.FillBounds,
-                                                modifier = Modifier.width(110.dp).height(130.dp)
-                                                        .padding(top = 5.dp)
-                                        )
+                                        Owner(logo = R.drawable.torressansebastian_logo,
+                                                descriptionLogo = R.string.urtss,
+                                                link = stringResource(id = R.string.url_app_urtss),
+                                                modifierLogo = Modifier.width(110.dp).height(130.dp)
+                                                        .padding(top = 5.dp))
                                 }
 
-                                Image(
-                                        painter = painterResource(id = R.drawable.googleplay)
-                                        , contentDescription = "Google Play"
-                                        ,modifier = Modifier
-                                                .width(150.dp)
-                                                .clickable {
-                                                        val uri = Uri.parse(linkGP)
-                                                        val intent = Intent(Intent.ACTION_VIEW, uri)
-                                                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                                        context.startActivity(intent)
-                                                }
-                                )
+
 
                                 Button(onClick = {
                                         val uri = Uri.parse(linkWebSiteApp)
@@ -128,6 +113,30 @@ fun About(versionDetail:String,applicationId:String){
 
         }
 
+}
+
+@Composable
+fun Owner(@DrawableRes logo: Int, @StringRes descriptionLogo:Int, link:String,modifierLogo:Modifier){
+        val context = LocalContext.current
+        Image(
+                painter = painterResource(id = logo),
+                contentDescription = stringResource(id = descriptionLogo),
+                contentScale = ContentScale.FillBounds,
+                modifier = modifierLogo
+        )
+
+        Image(
+                painter = painterResource(id = R.drawable.googleplay)
+                , contentDescription = "Google Play"
+                ,modifier = Modifier
+                        .width(150.dp)
+                        .clickable {
+                                val uri = Uri.parse(link)
+                                val intent = Intent(Intent.ACTION_VIEW, uri)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                context.startActivity(intent)
+                        }
+        )
 }
 
 @Composable
