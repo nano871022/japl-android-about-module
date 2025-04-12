@@ -10,13 +10,21 @@
     <string name="previous">Previous</string>
 
     <string name="name_app_uralameda_181">UR Alameda 181</string>
-    <string name="description">
+    <string name="description_finances">
         Esta Aplicación es realizada para manejar las finanzas personales para tener un mayor control.\n
         * Pagos con Tarjeta de Crédito\n
         * Pagos de Créditos\n
         * Pagos con efectivo.\n
         * Proyeciones de Ahorro\n
         * Simuladores de cuota fija y cuota variable
+
+    </string>
+    <string name="description_tss">
+        Está aplicacion es realizada para los residentes de Torres San sebastian para que tengan toda la información de reglas de la unidad e información de la administración
+
+    </string>
+    <string name="description_alameda181">
+        Está aplicacion es realizada para los residentes de la Unidad Residencial Alameda 181 para que tengan toda la información de reglas de la unidad e información de la administración
 
     </string>
     <string name="copy_right">CopyRight © 2022-2025 Finanzas</string>

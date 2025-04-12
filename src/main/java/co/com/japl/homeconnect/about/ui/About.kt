@@ -49,6 +49,13 @@ fun About(versionDetail:String,applicationId:String){
         val linkWebSiteApp = stringResource(id = R.string.url_website)
         val context = LocalContext.current
         val color = MaterialTheme.colorScheme.onBackground
+        val description = if(applicationId.lowercase().contains("myapplication")){
+                R.string.description_finances
+        }else if(applicationId.lowercase().contains("alameda181")){
+                R.string.description_alameda181
+        }else{
+                R.string.urtss
+        }
 
         Column (
                 verticalArrangement = Arrangement.Top,
@@ -93,7 +100,7 @@ fun About(versionDetail:String,applicationId:String){
                                 }
                         }
 
-                        Text(stringResource(id = R.string.description),
+                        Text(stringResource(id = description),
                         color=color,
                         modifier=Modifier.padding(start=10.dp))
 
