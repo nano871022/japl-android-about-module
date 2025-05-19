@@ -54,7 +54,7 @@ fun About(versionDetail:String,applicationId:String){
         }else if(applicationId.lowercase().contains("alameda181")){
                 R.string.description_alameda181
         }else{
-                R.string.urtss
+                R.string.urtss_label_title
         }
 
         Column (
