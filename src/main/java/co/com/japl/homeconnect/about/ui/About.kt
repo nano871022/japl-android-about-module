@@ -24,6 +24,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -196,7 +197,7 @@ fun CardTorres(){
                                 .align(
                                         alignment = Alignment.CenterHorizontally
                                 ))
-                Divider(modifier = Modifier.padding(top=10.dp, bottom=10.dp))
+                HorizontalDivider(modifier = Modifier.padding(top=10.dp, bottom=10.dp))
 
                 AndroidView(
                         factory= {
@@ -248,7 +249,7 @@ fun CardCRAlameda181(){
                                 .align(
                                         alignment = Alignment.CenterHorizontally
                                 ))
-                Divider(modifier = Modifier.padding(top=10.dp, bottom=10.dp))
+                HorizontalDivider(modifier = Modifier.padding(top=10.dp, bottom=10.dp))
 
                 AndroidView(
                         factory= {
@@ -290,7 +291,7 @@ fun CardFinanzas(){
                         id = R.string.fiances
                 ), modifier = Modifier.align(alignment = Alignment.CenterHorizontally))
 
-                Divider(modifier=Modifier.padding(top=10.dp, bottom=10.dp))
+                HorizontalDivider(modifier = Modifier.padding(top=10.dp, bottom=10.dp))
 
                 Text(text = stringResource(id = R.string.fiances),
                         color = MaterialTheme.colorScheme.onSurface,
