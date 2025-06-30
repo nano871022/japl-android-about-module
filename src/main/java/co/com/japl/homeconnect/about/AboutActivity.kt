@@ -1,11 +1,11 @@
-package co.com.alameda181.unidadresidencialalameda181.about
+package co.com.japl.homeconnect.about
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.rememberNavController
-import co.com.alameda181.unidadresidencialalameda181.about.UI.About
+import co.com.japl.homeconnect.about.ui.About
 import co.com.japl.ui.theme.MaterialThemeComposeUI
 
 class AboutActivity : AppCompatActivity() {
@@ -17,7 +17,7 @@ class AboutActivity : AppCompatActivity() {
             val navController = rememberNavController()
             val context = LocalContext.current.applicationContext
             MaterialThemeComposeUI {
-                About("Module sin version")
+                About("Module sin version","torressansebastian")
             }
         }
     }

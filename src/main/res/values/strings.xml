@@ -9,12 +9,30 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="name">Unidad Residencial Alameda 181</string>
-    <string name="description">Está aplicacion es realizada para los residentes de la Unidad Residencial Alameda 181 para que tengan toda la información de reglas de la unidad e información de la administración</string>
-    <string name="copy_right">CopyRight © 2023-2024 UR Alameda181</string>
+    <string name="name_app_uralameda_181">UR Alameda 181</string>
+    <string name="description_finances">
+        Esta Aplicación es realizada para manejar las finanzas personales para tener un mayor control.\n
+        * Pagos con Tarjeta de Crédito\n
+        * Pagos de Créditos\n
+        * Pagos con efectivo.\n
+        * Proyeciones de Ahorro\n
+        * Simuladores de cuota fija y cuota variable
+
+    </string>
+    <string name="description_tss">
+        Está aplicacion es realizada para los residentes de Torres San sebastian para que tengan toda la información de reglas de la unidad e información de la administración
+
+    </string>
+    <string name="description_alameda181">
+        Está aplicacion es realizada para los residentes de la Unidad Residencial Alameda 181 para que tengan toda la información de reglas de la unidad e información de la administración
+
+    </string>
+    <string name="copy_right">CopyRight © 2022-2025 Finanzas</string>
 
     <string name="urtss"><![CDATA[U.R. Torres <br/>San Sebastian]]></string>
+    <string name="urtss_label_title">U.R. Torres San Sebastian</string>
     <string name="fiances">Finanzas Personales</string>
+    <string name="alameda181">CR Alameda181</string>
     <string name="url_app_uralameda181"><![CDATA[https://play.google.com/store/apps/details?id=co.com.alameda181.unidadresidencialalameda181&pcampaignid=web_share]]></string>
     <string name="url_app_urtss"><![CDATA[https://play.google.com/store/apps/details?id=co.japl.android.torressansebastian&pcampaignid=web_share]]></string>
     <string name="url_app_finance"><![CDATA[https://play.google.com/store/apps/details?id=co.japl.android.myapplication&pcampaignid=web_share]]></string>
@@ -65,4 +83,7 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="url_app_googleplay">https://play.google.com/store/apps/dev?id=4892761986588217653</string>
+    <string name="website">Página Web App</string>
+    <string name="url_website">https://finanzaspersonalesapp.japl.dev/</string>
+    <string name="url_japl">https://me.japl.dev</string>
 </resources>
