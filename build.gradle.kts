@@ -2,10 +2,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
 
 plugins {
     id("com.android.library")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
+    id("com.android.legacy-kapt")
 
-    id("org.jetbrains.kotlin.plugin.compose")
+    id("org.jetbrains.kotlin.plugin.compose") version "2.4.10"
 }
 
 android {
@@ -36,8 +35,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures {
         compose = true
@@ -47,8 +46,11 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
+
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+        }
     }
 }
 
@@ -71,8 +73,8 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.2.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.8.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.8.3")
-    implementation("com.google.dagger:hilt-android:2.52")
-    kapt("com.google.dagger:hilt-android-compiler:2.52")
+    implementation("com.google.dagger:hilt-android:2.60.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.60.1")
 
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
