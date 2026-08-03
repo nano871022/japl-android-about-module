@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
+
 plugins {
     id("com.android.library")
     id("com.android.legacy-kapt")
@@ -54,7 +56,7 @@ android {
 
 dependencies {
     implementation(project(":ui"))
-    implementation("androidx.core:core-ktx:1.13.1") //version android 14
+    implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
     implementation("androidx.activity:activity-compose:1.9.3")
     implementation("androidx.compose.ui:ui")
