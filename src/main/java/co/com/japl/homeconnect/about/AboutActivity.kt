@@ -9,7 +9,6 @@ import co.com.japl.homeconnect.about.ui.About
 import co.com.japl.ui.theme.MaterialThemeComposeUI
 
 class AboutActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
