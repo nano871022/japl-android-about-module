@@ -45,16 +45,16 @@ import co.com.japl.homeconnect.about.R
 import co.com.japl.ui.theme.MaterialThemeComposeUI
 
 @Composable
-fun About(versionDetail:String,applicationId:String){
+fun About(versionDetail: String, applicationId: String) {
 
         val linkWebSiteApp = stringResource(id = R.string.url_website)
         val context = LocalContext.current
         val color = MaterialTheme.colorScheme.onBackground
-        val description = if(applicationId.lowercase().contains("myapplication")){
+        val description = if (applicationId.lowercase().contains("myapplication")) {
                 R.string.description_finances
-        }else if(applicationId.lowercase().contains("alameda181")){
+        } else if (applicationId.lowercase().contains("alameda181")) {
                 R.string.description_alameda181
-        }else{
+        } else {
                 R.string.urtss_label_title
         }
 
@@ -65,23 +65,23 @@ fun About(versionDetail:String,applicationId:String){
                         .fillMaxWidth()
                         .verticalScroll(rememberScrollState())
         ){
-                Row() {
+                Row () {
                         Column {
-                                if(applicationId.lowercase().contains("myapplication")) {
+                                if (applicationId.lowercase().contains("myapplication")) {
                                         Owner(logo = R.drawable.finanzaspersonales,
                                                 descriptionLogo = R.string.fiances,
                                                 link = stringResource(id = R.string.url_app_finance),
                                                 modifierLogo = Modifier.width(150.dp).height(130.dp)
                                                         .padding(top = 5.dp))
                                 }
-                                if(applicationId.lowercase().contains("alameda181")) {
+                                if (applicationId.lowercase().contains("alameda181")) {
                                         Owner(logo = R.drawable.img,
                                                 descriptionLogo = R.string.alameda181,
                                                 link = stringResource(id = R.string.url_app_uralameda181),
                                                 modifierLogo = Modifier.width(150.dp).height(130.dp)
                                                         .padding(top = 5.dp))
                                 }
-                                if(applicationId.lowercase().contains("torressansebastian")) {
+                                if (applicationId.lowercase().contains("torressansebastian")) {
                                         Owner(logo = R.drawable.torressansebastian_logo,
                                                 descriptionLogo = R.string.urtss,
                                                 link = stringResource(id = R.string.url_app_urtss),
@@ -91,74 +91,74 @@ fun About(versionDetail:String,applicationId:String){
 
 
 
-                                Button(onClick = {
+                                Button (onClick = {
                                         val uri = Uri.parse(linkWebSiteApp)
                                         val intent = Intent(Intent.ACTION_VIEW, uri)
                                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                                         context.startActivity(intent)
-                                }){
+                                } ){
                                         Text(stringResource(id = R.string.website))
                                 }
                         }
 
-                        Text(stringResource(id = description),
+                        Text (stringResource (id = description),
                         color=color,
                         modifier=Modifier.padding(start=10.dp))
 
                 }
 
-                Text(text=versionDetail,
+                Text (text=versionDetail,
                 		color=color,
                 		modifier = Modifier.padding(top = 20.dp, start=10.dp))
 
-                Text(stringResource(id = R.string.copy_right), 
+                Text (stringResource (id = R.string.copy_right), 
 		                color=color,
 		                modifier = Modifier
                                 .align(Alignment.End)
                                 .padding(top = 20.dp))
 
-                AppBrothers(applicationId)
+                AppBrothers (applicationId)
 
         }
 
 }
 
 @Composable
-fun Owner(@DrawableRes logo: Int, @StringRes descriptionLogo:Int, link:String,modifierLogo:Modifier){
+fun Owner (@DrawableRes logo: Int, @StringRes descriptionLogo: Int, link: String, modifierLogo: Modifier) {
         val context = LocalContext.current
-        Image(
-                painter = painterResource(id = logo),
-                contentDescription = stringResource(id = descriptionLogo),
+        Image (
+                painter = painterResource (id = logo),
+                contentDescription = stringResource (id = descriptionLogo),
                 contentScale = ContentScale.FillBounds,
                 modifier = modifierLogo
         )
 
-        Image(
-                painter = painterResource(id = R.drawable.googleplay)
+        Image (
+                painter = painterResource (id = R.drawable.googleplay)
                 , contentDescription = "Google Play"
                 ,modifier = Modifier
                         .width(150.dp)
                         .clickable {
-                                val uri = Uri.parse(link)
-                                val intent = Intent(Intent.ACTION_VIEW, uri)
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                context.startActivity(intent)
+                                val uri = Uri.parse (link)
+                                val intent = Intent (Intent.ACTION_VIEW, uri)
+                                intent.addFlags (Intent.FLAG_ACTIVITY_NEW_TASK)
+                                context.startActivity (intent)
                         }
         )
 }
 
 @Composable
-fun AppBrothers(applicationId:String){
-        Divider(modifier=Modifier.padding(10.dp))
+fun AppBrothers (applicationId: String) {
+        Divider (modifier=Modifier.padding(10.dp))
 
         Row() {
-                if(!applicationId.lowercase().contains("torressansebastian")){
+                if (!applicationId.lowercase().contains("torressansebastian")){
                         CardTorres()
                 }
-                if(!applicationId.lowercase().contains("myapplication")) {
+                if (!applicationId.lowercase().contains("myapplication")) {
                         CardFinanzas()
                 }
-                if(!applicationId.lowercase().contains("alameda181")) {
+                if (!applicationId.lowercase().contains("alameda181")) {
                         CardCRAlameda181()
                 }
 
@@ -169,13 +169,13 @@ fun AppBrothers(applicationId:String){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CardTorres(){
+fun CardTorres () {
         val context = LocalContext.current.applicationContext
         val url = stringResource(id = R.string.url_app_urtss)
         val name = stringResource(id = R.string.urtss)
         val nameFormat = remember { HtmlCompat.fromHtml(name, HtmlCompat.FROM_HTML_MODE_COMPACT)}
         val color = MaterialTheme.colorScheme.onSurface
-        Card(
+        Card (
                 onClick = {
                         val link = url
                         val uri = Uri.parse(link)
@@ -188,7 +188,7 @@ fun CardTorres(){
                         .padding(5.dp)
         ) {
 
-                Image(painter= painterResource(id = R.drawable.torressansebastian_logo),contentDescription = stringResource(
+                Image (painter= painterResource(id = R.drawable.torressansebastian_logo),contentDescription = stringResource(
                         id = R.string.urtss
                 ), contentScale = ContentScale.FillBounds,
                        modifier= Modifier
@@ -199,21 +199,21 @@ fun CardTorres(){
                                 ))
                 HorizontalDivider(modifier = Modifier.padding(top=10.dp, bottom=10.dp))
 
-                AndroidView(
+                AndroidView (
                         factory= {
-                                TextView(it).apply{
+                                TextView (it).apply{
 
                                 }
                                  },
                         update = {
                                 it.text = nameFormat
-                                it.setTextColor(color.toArgb())
+                                it.setTextColor (color.toArgb())
                                  },
                         modifier = Modifier
-                                .align(
+                                .align (
                                         alignment = Alignment.CenterHorizontally
                                 )
-                                .padding(5.dp))
+                                .padding (5.dp))
 
 
         }
@@ -221,26 +221,26 @@ fun CardTorres(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CardCRAlameda181(){
+fun CardCRAlameda181 () {
         val context = LocalContext.current.applicationContext
-        val url = stringResource(id = R.string.url_app_uralameda181)
-        val name = stringResource(id = R.string.alameda181)
-        val nameFormat = remember { HtmlCompat.fromHtml(name, HtmlCompat.FROM_HTML_MODE_COMPACT)}
+        val url = stringResource (id = R.string.url_app_uralameda181)
+        val name = stringResource (id = R.string.alameda181)
+        val nameFormat = remember { HtmlCompat.fromHtml (name, HtmlCompat.FROM_HTML_MODE_COMPACT)}
         val color = MaterialTheme.colorScheme.onSurface
         Card(
                 onClick = {
                         val link = url
-                        val uri = Uri.parse(link)
-                        val intent = Intent(Intent.ACTION_VIEW, uri)
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        context.startActivity(intent)
+                        val uri = Uri.parse (link)
+                        val intent = Intent (Intent.ACTION_VIEW, uri)
+                        intent.addFlags (Intent.FLAG_ACTIVITY_NEW_TASK)
+                        context.startActivity (intent)
                 },
                 modifier = Modifier
-                        .width(120.dp)
-                        .padding(5.dp)
+                        .width (120.dp)
+                        .padding (5.dp)
         ) {
 
-                Image(painter= painterResource(id = R.drawable.img),contentDescription = stringResource(
+                Image(painter= painterResource (id = R.drawable.img),contentDescription = stringResource (
                         id = R.string.urtss
                 ), contentScale = ContentScale.FillBounds,
                         modifier= Modifier
@@ -249,125 +249,125 @@ fun CardCRAlameda181(){
                                 .align(
                                         alignment = Alignment.CenterHorizontally
                                 ))
-                HorizontalDivider(modifier = Modifier.padding(top=10.dp, bottom=10.dp))
+                HorizontalDivider (modifier = Modifier.padding(top=10.dp, bottom=10.dp))
 
-                AndroidView(
+                AndroidView (
                         factory= {
-                                TextView(it).apply{
+                                TextView (it).apply{
 
                                 }
                         },
                         update = {
                                 it.text = nameFormat
-                                it.setTextColor(color.toArgb())
+                                it.setTextColor (color.toArgb())
                         },
                         modifier = Modifier
-                                .align(
+                                .align (
                                         alignment = Alignment.CenterHorizontally
                                 )
-                                .padding(5.dp))
+                                .padding (5.dp))
 
 
         }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn (ExperimentalMaterial3Api::class)
 @Composable
-fun CardFinanzas(){
+fun CardFinanzas () {
         val context = LocalContext.current.applicationContext
         val url = stringResource(id = R.string.url_app_finance)
-        Card( onClick = {
+        Card ( onClick = {
                 val link = url
-                val uri = Uri.parse(link)
-                val intent = Intent(Intent.ACTION_VIEW, uri)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                context.startActivity(intent)
+                val uri = Uri.parse (link)
+                val intent = Intent (Intent.ACTION_VIEW, uri)
+                intent.addFlags (Intent.FLAG_ACTIVITY_NEW_TASK)
+                context.startActivity (intent)
         },modifier = Modifier
-                .width(115.dp)
-                .padding(5.dp)) {
+                .width (115.dp)
+                .padding (5.dp)) {
 
-                Image(painter= painterResource(id = R.drawable.finanzaspersonales),
-                        contentDescription = stringResource(
+                Image (painter= painterResource (id = R.drawable.finanzaspersonales),
+                        contentDescription = stringResource (
                         id = R.string.fiances
-                ), modifier = Modifier.align(alignment = Alignment.CenterHorizontally))
+                ), modifier = Modifier.align (alignment = Alignment.CenterHorizontally))
 
-                HorizontalDivider(modifier = Modifier.padding(top=10.dp, bottom=10.dp))
+                HorizontalDivider (modifier = Modifier.padding(top=10.dp, bottom=10.dp))
 
-                Text(text = stringResource(id = R.string.fiances),
+                Text (text = stringResource (id = R.string.fiances),
                         color = MaterialTheme.colorScheme.onSurface,
                         modifier= Modifier
-                        .align(
+                        .align (
                                 alignment = Alignment.CenterHorizontally
-                        ).padding(5.dp))
+                        ).padding (5.dp))
 
 
         }
 }
 
 @Composable
-fun CardOwn(){
+fun CardOwn () {
         val context = LocalContext.current.applicationContext
-        val urlGit = stringResource(id = R.string.url_app_github)
-        val urlJAPL = stringResource(id = R.string.url_japl)
-        val urlLinkedIn = stringResource(id = R.string.url_app_linkedin)
-        val urlGooglePlay = stringResource(id = R.string.url_app_googleplay)
-        val txt = stringResource(R.string.own_detail)
-        val html = remember { HtmlCompat.fromHtml(txt, HtmlCompat.FROM_HTML_MODE_COMPACT)}
+        val urlGit = stringResource (id = R.string.url_app_github)
+        val urlJAPL = stringResource (id = R.string.url_japl)
+        val urlLinkedIn = stringResource (id = R.string.url_app_linkedin)
+        val urlGooglePlay = stringResource (id = R.string.url_app_googleplay)
+        val txt = stringResource (R.string.own_detail)
+        val html = remember { HtmlCompat.fromHtml (txt, HtmlCompat.FROM_HTML_MODE_COMPACT)}
         val color = MaterialTheme.colorScheme.onSurface
-        Card(modifier=Modifier.padding(10.dp)){
+        Card (modifier=Modifier.padding (10.dp)) {
 
                 Row {
 
-                        Image(painter= painterResource(id = R.drawable.design),
-                                contentDescription = stringResource(
+                        Image (painter= painterResource (id = R.drawable.design),
+                                contentDescription = stringResource (
                                         id = R.string.fiances
-                                ),modifier=Modifier.width(150.dp))
+                                ), modifier=Modifier.width (150.dp))
 
-                        AndroidView(
+                        AndroidView (
                                 factory = {
-                                        TextView(it).apply {
-                                                movementMethod = LinkMovementMethod.getInstance()
+                                        TextView (it).apply {
+                                                movementMethod = LinkMovementMethod.getInstance ()
                                         }
                                 },
                                 update = { it.text = html
-                                        it.setTextColor(color.toArgb())
+                                        it.setTextColor (color.toArgb ())
                                          },
                                 modifier = Modifier.padding(20.dp)
                         )
                 }
 
-                Row(modifier=Modifier.padding(10.dp)) {
+                Row (modifier=Modifier.padding ( 10.dp ) ) {
 
-                        IconButton(onClick = {
+                        IconButton ( onClick = {
                                 val link = urlGit
-                                val uri = Uri.parse(link)
-                                val intent = Intent(Intent.ACTION_VIEW, uri)
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                context.startActivity(intent)
+                                val uri = Uri.parse ( link )
+                                val intent = Intent ( Intent.ACTION_VIEW, uri )
+                                intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK )
+                                context.startActivity ( intent )
                         }, modifier = Modifier
-                                .width(100.dp)
-                                .height(100.dp)) {
-                                Image(
-                                        painter = painterResource(id = R.drawable.github_logo),
-                                        contentDescription = stringResource(
+                                .width ( 100.dp )
+                                .height ( 100.dp ) ) {
+                                Image (
+                                        painter = painterResource ( id = R.drawable.github_logo ),
+                                        contentDescription = stringResource (
                                                 id = R.string.own_detail
                                         )
                                 )
                         }
 
-                        IconButton(onClick = {
+                        IconButton (onClick = {
                                 val link = urlLinkedIn
-                                val uri = Uri.parse(link)
-                                val intent = Intent(Intent.ACTION_VIEW, uri)
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                context.startActivity(intent)
+                                val uri = Uri.parse ( link )
+                                val intent = Intent ( Intent.ACTION_VIEW, uri )
+                                intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK )
+                                context.startActivity ( intent )
                         }, modifier = Modifier
-                                .width(100.dp)
-                                .height(100.dp)
-                                .padding(start = 10.dp)) {
-                                Image(
-                                        painter = painterResource(id = R.drawable.linkedin2),
-                                        contentDescription = stringResource(
+                                .width ( 100.dp )
+                                .height ( 100.dp )
+                                .padding ( start = 10.dp ) ) {
+                                Image (
+                                        painter = painterResource (id = R.drawable.linkedin2),
+                                        contentDescription = stringResource (
                                                 id = R.string.own_detail
                                         )
                                 )
@@ -375,88 +375,88 @@ fun CardOwn(){
 
                         IconButton(onClick = {
                                 val link = urlGooglePlay
-                                val uri = Uri.parse(link)
-                                val intent = Intent(Intent.ACTION_VIEW, uri)
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                context.startActivity(intent)
+                                val uri = Uri.parse ( link )
+                                val intent = Intent ( Intent.ACTION_VIEW, uri )
+                                intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK )
+                                context.startActivity ( intent )
                         }, modifier = Modifier
-                                .width(100.dp)
-                                .height(100.dp)
-                                .padding(start = 10.dp)) {
-                                Image(
-                                        painter = painterResource(id = R.drawable.googleplay),
-                                        contentDescription = stringResource(
+                                .width ( 100.dp )
+                                .height ( 100.dp )
+                                .padding ( start = 10.dp ) ) {
+                                Image (
+                                        painter = painterResource ( id = R.drawable.googleplay ),
+                                        contentDescription = stringResource (
                                                 id = R.string.own_detail
                                         )
                                 )
                         }
                         
-                        IconButton(onClick = {
-                                val uri = Uri.parse(urlJAPL)
-                                val intent = Intent(Intent.ACTION_VIEW, uri)
-                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                context.startActivity(intent)}, modifier = Modifier
-                                .width(100.dp)
-                                .height(100.dp)
-                                .padding(start = 10.dp)) {
-                                Image( painter = painterResource(id = R.drawable.icon_japl),
-                                        modifier = Modifier.width(40.dp).height(40.dp),
-                                        contentDescription = urlJAPL)
+                        IconButton (onClick = {
+                                val uri = Uri.parse ( urlJAPL)
+                                val intent = Intent ( Intent.ACTION_VIEW, uri )
+                                intent.addFlags ( Intent.FLAG_ACTIVITY_NEW_TASK )
+                                context.startActivity ( intent )}, modifier = Modifier
+                                .width ( 100.dp )
+                                .height ( 100.dp )
+                                .padding ( start = 10.dp ) ) {
+                                Image ( painter = painterResource (id = R.drawable.icon_japl ),
+                                        modifier = Modifier.width ( 40.dp ).height ( 40.dp ),
+                                        contentDescription = urlJAPL )
                                 
                         }
                 }
         }
 }
 
-@RequiresApi(Build.VERSION_CODES.S)
-@Preview( showSystemUi = true,  uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true, device = "id:pixel_5", backgroundColor = 0xFFFFFFFF)
+@RequiresApi (Build.VERSION_CODES.S)
+@Preview ( showSystemUi = true,  uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true, device = "id:pixel_5", backgroundColor = 0xFFFFFFFF )
 @Composable
-fun preview(){
+fun preview () {
     MaterialThemeComposeUI {
-                About(versionDetail="V1.0.0 Primera version de la app",applicationId="torressansebastian")
+                About ( versionDetail="V1.0.0 Primera version de la app", applicationId="torressansebastian" )
         }
 }
 
-@RequiresApi(Build.VERSION_CODES.S)
-@Preview( showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, device = "id:pixel_5", backgroundColor = 0x00000000)
+@RequiresApi (Build.VERSION_CODES.S)
+@Preview ( showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, device = "id:pixel_5", backgroundColor = 0x00000000 )
 @Composable
-fun previewDark(){
+fun previewDark () {
         MaterialThemeComposeUI {
-                About(versionDetail="V1.0.0 Primera version de la app",applicationId="torressansebastian")
+                About (versionDetail="V1.0.0 Primera version de la app", applicationId="torressansebastian" )
         }
 }
-@RequiresApi(Build.VERSION_CODES.S)
-@Preview( showSystemUi = true,  uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true, device = "id:pixel_5", backgroundColor = 0xFFFFFFFF)
+@RequiresApi (Build.VERSION_CODES.S)
+@Preview ( showSystemUi = true,  uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true, device = "id:pixel_5", backgroundColor = 0xFFFFFFFF )
 @Composable
-fun previewFinances(){
+fun previewFinances () {
         MaterialThemeComposeUI {
-                About(versionDetail="V1.0.0 Primera version de la app",applicationId="myapplication")
-        }
-}
-
-@RequiresApi(Build.VERSION_CODES.S)
-@Preview( showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, device = "id:pixel_5", backgroundColor = 0x00000000)
-@Composable
-fun previewDarkFinances(){
-        MaterialThemeComposeUI {
-                About(versionDetail="V1.0.0 Primera version de la app",applicationId="myapplication")
-        }
-}
-@RequiresApi(Build.VERSION_CODES.S)
-@Preview( showSystemUi = true,  uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true, device = "id:pixel_5", backgroundColor = 0xFFFFFFFF)
-@Composable
-fun previewAlameda181(){
-        MaterialThemeComposeUI {
-                About(versionDetail="V1.0.0 Primera version de la app",applicationId="unidadresidencialalameda181")
+                About (versionDetail="V1.0.0 Primera version de la app", applicationId="myapplication" )
         }
 }
 
-@RequiresApi(Build.VERSION_CODES.S)
-@Preview( showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, device = "id:pixel_5", backgroundColor = 0x00000000)
+@RequiresApi (Build.VERSION_CODES.S)
+@Preview ( showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, device = "id:pixel_5", backgroundColor = 0x00000000 )
 @Composable
-fun previewDarkAlameda181(){
+fun previewDarkFinances () {
         MaterialThemeComposeUI {
-                About(versionDetail="V1.0.0 Primera version de la app",applicationId="unidadresidencialalameda181")
+                About (versionDetail="V1.0.0 Primera version de la app", applicationId="myapplication" )
+        }
+}
+@RequiresApi (Build.VERSION_CODES.S)
+@Preview ( showSystemUi = true,  uiMode = Configuration.UI_MODE_NIGHT_NO, showBackground = true, device = "id:pixel_5", backgroundColor = 0xFFFFFFFF )
+@Composable
+fun previewAlameda181 () {
+        MaterialThemeComposeUI {
+                About (versionDetail="V1.0.0 Primera version de la app", applicationId="unidadresidencialalameda181" )
+        }
+}
+
+@RequiresApi ( Build.VERSION_CODES.S )
+@Preview ( showSystemUi = true, uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true, device = "id:pixel_5", backgroundColor = 0x00000000 )
+@Composable
+fun previewDarkAlameda181 () {
+        MaterialThemeComposeUI {
+                About (versionDetail="V1.0.0 Primera version de la app", applicationId="unidadresidencialalameda181" )
         }
 }
 
