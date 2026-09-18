@@ -67,7 +67,7 @@ fun About(
         modifier =
             Modifier
                 .fillMaxWidth()
-                .verticalScroll(rememberScrollState()),
+                .verticalScroll(rememberScrollState())
     ) {
         Row {
             Column {
@@ -96,6 +96,26 @@ fun About(
                         logo = R.drawable.torressansebastian_logo,
                         descriptionLogo = R.string.urtss,
                         link = stringResource(id = R.string.url_app_urtss),
+                        modifierLogo =
+                            Modifier.width(110.dp).height(130.dp)
+                                .padding(top = 5.dp),
+                    )
+                }
+                if (applicationId.lowercase().contains("synapsefit")) {
+                    Owner(
+                        logo = R.drawable.synapsefit,
+                        descriptionLogo = R.string.synapsefit,
+                        link = stringResource(id = R.string.url_app_synapsefit),
+                        modifierLogo =
+                            Modifier.width(110.dp).height(130.dp)
+                                .padding(top = 5.dp),
+                    )
+                }
+                if (applicationId.lowercase().contains("ride_connect")) {
+                    Owner(
+                        logo = R.drawable.ride_connect,
+                        descriptionLogo = R.string.ride_connect,
+                        link = stringResource(id = R.string.url_app_ride_connect),
                         modifierLogo =
                             Modifier.width(110.dp).height(130.dp)
                                 .padding(top = 5.dp),
@@ -138,337 +158,6 @@ fun About(
     }
 }
 
-@Composable
-fun Owner(
-    @DrawableRes logo: Int,
-    @StringRes descriptionLogo: Int,
-    link: String,
-    modifierLogo: Modifier,
-) {
-    val context = LocalContext.current
-    Image(
-        painter = painterResource(id = logo),
-        contentDescription = stringResource(id = descriptionLogo),
-        contentScale = ContentScale.FillBounds,
-        modifier = modifierLogo,
-    )
-
-    Image(
-        painter = painterResource(id = R.drawable.googleplay),
-        contentDescription = "Google Play",
-        modifier =
-            Modifier
-                .width(150.dp)
-                .clickable {
-                    val uri = Uri.parse(link)
-                    val intent = Intent(Intent.ACTION_VIEW, uri)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    context.startActivity(intent)
-                },
-    )
-}
-
-@Composable
-fun AppBrothers(applicationId: String) {
-    Divider(modifier = Modifier.padding(10.dp))
-
-    Row {
-        if (!applicationId.lowercase().contains("torressansebastian"))
-            {
-                CardTorres()
-            }
-        if (!applicationId.lowercase().contains("myapplication")) {
-            CardFinanzas()
-        }
-        if (!applicationId.lowercase().contains("alameda181")) {
-            CardCRAlameda181()
-        }
-    }
-
-    CardOwn()
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun CardTorres() {
-    val context = LocalContext.current.applicationContext
-    val url = stringResource(id = R.string.url_app_urtss)
-    val name = stringResource(id = R.string.urtss)
-    val nameFormat = remember { HtmlCompat.fromHtml(name, HtmlCompat.FROM_HTML_MODE_COMPACT) }
-    val color = MaterialTheme.colorScheme.onSurface
-    Card(
-        onClick = {
-            val link = url
-            val uri = Uri.parse(link)
-            val intent = Intent(Intent.ACTION_VIEW, uri)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            context.startActivity(intent)
-        },
-        modifier =
-            Modifier
-                .width(120.dp)
-                .padding(5.dp),
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.torressansebastian_logo),
-            contentDescription =
-                stringResource(
-                    id = R.string.urtss,
-                ),
-            contentScale = ContentScale.FillBounds,
-            modifier =
-                Modifier
-                    .width(80.dp)
-                    .height(90.dp)
-                    .align(
-                        alignment = Alignment.CenterHorizontally,
-                    ),
-        )
-        HorizontalDivider(modifier = Modifier.padding(top = 10.dp, bottom = 10.dp))
-
-        AndroidView(
-            factory = {
-                TextView(it).apply {
-                }
-            },
-            update = {
-                it.text = nameFormat
-                it.setTextColor(color.toArgb())
-            },
-            modifier =
-                Modifier
-                    .align(
-                        alignment = Alignment.CenterHorizontally,
-                    )
-                    .padding(5.dp),
-        )
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun CardCRAlameda181() {
-    val context = LocalContext.current.applicationContext
-    val url = stringResource(id = R.string.url_app_uralameda181)
-    val name = stringResource(id = R.string.alameda181)
-    val nameFormat = remember { HtmlCompat.fromHtml(name, HtmlCompat.FROM_HTML_MODE_COMPACT) }
-    val color = MaterialTheme.colorScheme.onSurface
-    Card(
-        onClick = {
-            val link = url
-            val uri = Uri.parse(link)
-            val intent = Intent(Intent.ACTION_VIEW, uri)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            context.startActivity(intent)
-        },
-        modifier =
-            Modifier
-                .width(120.dp)
-                .padding(5.dp),
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.img),
-            contentDescription =
-                stringResource(
-                    id = R.string.urtss,
-                ),
-            contentScale = ContentScale.FillBounds,
-            modifier =
-                Modifier
-                    .width(80.dp)
-                    .height(90.dp)
-                    .align(
-                        alignment = Alignment.CenterHorizontally,
-                    ),
-        )
-        HorizontalDivider(modifier = Modifier.padding(top = 10.dp, bottom = 10.dp))
-
-        AndroidView(
-            factory = {
-                TextView(it).apply {
-                }
-            },
-            update = {
-                it.text = nameFormat
-                it.setTextColor(color.toArgb())
-            },
-            modifier =
-                Modifier
-                    .align(
-                        alignment = Alignment.CenterHorizontally,
-                    )
-                    .padding(5.dp),
-        )
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun CardFinanzas() {
-    val context = LocalContext.current.applicationContext
-    val url = stringResource(id = R.string.url_app_finance)
-    Card(
-        onClick = {
-            val link = url
-            val uri = Uri.parse(link)
-            val intent = Intent(Intent.ACTION_VIEW, uri)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            context.startActivity(intent)
-        },
-        modifier =
-            Modifier
-                .width(115.dp)
-                .padding(5.dp),
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.finanzaspersonales),
-            contentDescription =
-                stringResource(
-                    id = R.string.fiances,
-                ),
-            modifier = Modifier.align(alignment = Alignment.CenterHorizontally),
-        )
-
-        HorizontalDivider(modifier = Modifier.padding(top = 10.dp, bottom = 10.dp))
-
-        Text(
-            text = stringResource(id = R.string.fiances),
-            color = MaterialTheme.colorScheme.onSurface,
-            modifier =
-                Modifier
-                    .align(
-                        alignment = Alignment.CenterHorizontally,
-                    ).padding(5.dp),
-        )
-    }
-}
-
-@Composable
-fun CardOwn() {
-    val context = LocalContext.current.applicationContext
-    val urlGit = stringResource(id = R.string.url_app_github)
-    val urlJAPL = stringResource(id = R.string.url_japl)
-    val urlLinkedIn = stringResource(id = R.string.url_app_linkedin)
-    val urlGooglePlay = stringResource(id = R.string.url_app_googleplay)
-    val txt = stringResource(R.string.own_detail)
-    val html = remember { HtmlCompat.fromHtml(txt, HtmlCompat.FROM_HTML_MODE_COMPACT) }
-    val color = MaterialTheme.colorScheme.onSurface
-    Card(modifier = Modifier.padding(10.dp)) {
-        Row {
-            Image(
-                painter = painterResource(id = R.drawable.design),
-                contentDescription =
-                    stringResource(
-                        id = R.string.fiances,
-                    ),
-                modifier = Modifier.width(150.dp),
-            )
-
-            AndroidView(
-                factory = {
-                    TextView(it).apply {
-                        movementMethod = LinkMovementMethod.getInstance()
-                    }
-                },
-                update = {
-                    it.text = html
-                    it.setTextColor(color.toArgb())
-                },
-                modifier = Modifier.padding(20.dp),
-            )
-        }
-
-        Row(modifier = Modifier.padding(10.dp)) {
-            IconButton(
-                onClick = {
-                    val link = urlGit
-                    val uri = Uri.parse(link)
-                    val intent = Intent(Intent.ACTION_VIEW, uri)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    context.startActivity(intent)
-                },
-                modifier =
-                    Modifier
-                        .width(100.dp)
-                        .height(100.dp),
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.github_logo),
-                    contentDescription =
-                        stringResource(
-                            id = R.string.own_detail,
-                        ),
-                )
-            }
-
-            IconButton(
-                onClick = {
-                    val link = urlLinkedIn
-                    val uri = Uri.parse(link)
-                    val intent = Intent(Intent.ACTION_VIEW, uri)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    context.startActivity(intent)
-                },
-                modifier =
-                    Modifier
-                        .width(100.dp)
-                        .height(100.dp)
-                        .padding(start = 10.dp),
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.linkedin2),
-                    contentDescription =
-                        stringResource(
-                            id = R.string.own_detail,
-                        ),
-                )
-            }
-
-            IconButton(
-                onClick = {
-                    val link = urlGooglePlay
-                    val uri = Uri.parse(link)
-                    val intent = Intent(Intent.ACTION_VIEW, uri)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    context.startActivity(intent)
-                },
-                modifier =
-                    Modifier
-                        .width(100.dp)
-                        .height(100.dp)
-                        .padding(start = 10.dp),
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.googleplay),
-                    contentDescription =
-                        stringResource(
-                            id = R.string.own_detail,
-                        ),
-                )
-            }
-
-            IconButton(
-                onClick = {
-                    val uri = Uri.parse(urlJAPL)
-                    val intent = Intent(Intent.ACTION_VIEW, uri)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    context.startActivity(intent)
-                },
-                modifier =
-                    Modifier
-                        .width(100.dp)
-                        .height(100.dp)
-                        .padding(start = 10.dp),
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.icon_japl),
-                    modifier = Modifier.width(40.dp).height(40.dp),
-                    contentDescription = urlJAPL,
-                )
-            }
-        }
-    }
-}
 
 @RequiresApi(Build.VERSION_CODES.S)
 @Preview(
@@ -557,5 +246,31 @@ fun previewAlameda181() {
 fun previewDarkAlameda181() {
     MaterialThemeComposeUI {
         About(versionDetail = "V1.0.0 Primera version de la app", applicationId = "unidadresidencialalameda181")
+    }
+}
+@Preview(
+    showSystemUi = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true,
+    device = "id:pixel_5",
+    backgroundColor = 0x00000000,
+)
+@Composable
+fun previewDarkRideConnect() {
+    MaterialThemeComposeUI {
+        About(versionDetail = "V1.0.0 Primera version de la app", applicationId = "co.japl.android.ev_ride_connect")
+    }
+}
+@Preview(
+    showSystemUi = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true,
+    device = "id:pixel_5",
+    backgroundColor = 0x00000000,
+)
+@Composable
+fun previewDarkSynapseFit() {
+    MaterialThemeComposeUI {
+        About(versionDetail = "V1.0.0 Primera version de la app", applicationId = "co.japl.android.synapsefit")
     }
 }

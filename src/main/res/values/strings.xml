@@ -27,15 +27,19 @@
         Está aplicacion es realizada para los residentes de la Unidad Residencial Alameda 181 para que tengan toda la información de reglas de la unidad e información de la administración
 
     </string>
-    <string name="copy_right">CopyRight © 2022-2025 Finanzas</string>
+    <string name="copy_right">CopyRight © 2022-2026 JAPL.dev</string>
 
     <string name="urtss"><![CDATA[U.R. Torres <br/>San Sebastian]]></string>
     <string name="urtss_label_title">U.R. Torres San Sebastian</string>
     <string name="fiances">Finanzas Personales</string>
+    <string name="synapsefit">Synapse Fit</string>
+    <string name="ride_connect">Ride Connect</string>
     <string name="alameda181">CR Alameda181</string>
     <string name="url_app_uralameda181"><![CDATA[https://play.google.com/store/apps/details?id=co.com.alameda181.unidadresidencialalameda181&pcampaignid=web_share]]></string>
     <string name="url_app_urtss"><![CDATA[https://play.google.com/store/apps/details?id=co.japl.android.torressansebastian&pcampaignid=web_share]]></string>
     <string name="url_app_finance"><![CDATA[https://play.google.com/store/apps/details?id=co.japl.android.myapplication&pcampaignid=web_share]]></string>
+    <string name="url_app_ride_connect"><![CDATA[https://play.google.com/store/apps/details?id=co.japl.android.ev_ride_connect&pcampaignid=web_share]]></string>
+    <string name="url_app_synapsefit"><![CDATA[https://play.google.com/store/apps/details?id=co.japl.android.synapsefit&pcampaignid=web_share]]></string>
     <string name="url_app_github"><![CDATA[https://github.com/nano871022]]></string>
     <string name="url_app_linkedin"><![CDATA[https://www.linkedin.com/in/ing-alejo-parra/]]></string>
     <string name="own_detail">
