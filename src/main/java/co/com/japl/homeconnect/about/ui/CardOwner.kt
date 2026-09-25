@@ -15,6 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import co.com.japl.homeconnect.about.R
+import androidx.core.net.toUri
 
 @Composable
 fun Owner(
@@ -38,7 +39,7 @@ fun Owner(
             Modifier
                 .width(150.dp)
                 .clickable {
-                    val uri = Uri.parse(link)
+                    val uri = link.toUri()
                     val intent = Intent(Intent.ACTION_VIEW, uri)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     context.startActivity(intent)

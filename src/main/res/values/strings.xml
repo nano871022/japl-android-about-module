@@ -90,4 +90,6 @@
     <string name="website">Página Web App</string>
     <string name="url_website">https://finanzaspersonalesapp.japl.dev/</string>
     <string name="url_japl">https://me.japl.dev</string>
+    <string name="description_ride_connect">Ride-Connect:Electric Scooter Controller App es una aplicación nativa para Android diseñada para conectarse a vehículos eléctricos, a través de Bluetooth Low Energy (BLE) utilizando el protocolo Tuya. La aplicación funciona de manera autónoma en el dispositivo del usuario y está construida sobre una arquitectura de datos totalmente privada. Esto garantiza la transparencia absoluta y el control total de la información por parte del usuario, ya que los datos no se envían ni se almacenan en servidores centralizados o de terceros.</string>
+    <string name="description_synapsefit">Plataforma integral de fitness para Android y Wear OS que prioriza el funcionamiento sin conexión (offline-first) y la soberanía de los datos del usuario, construida sobre una Arquitectura Hexagonal multimodular.</string>
 </resources>

@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.text.HtmlCompat
 import co.com.japl.homeconnect.about.R
+import androidx.core.net.toUri
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,7 +38,7 @@ fun CardTorres() {
     Card(
         onClick = {
             val link = url
-            val uri = Uri.parse(link)
+            val uri = link.toUri()
             val intent = Intent(Intent.ACTION_VIEW, uri)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)

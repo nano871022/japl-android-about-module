@@ -1,16 +1,11 @@
 package co.com.japl.homeconnect.about.ui
 
+import AppBrothers
 import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Build
-import android.text.method.LinkMovementMethod
-import android.widget.TextView
-import androidx.annotation.DrawableRes
 import androidx.annotation.RequiresApi
-import androidx.annotation.StringRes
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,28 +16,19 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.Divider
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
-import androidx.core.text.HtmlCompat
 import co.com.japl.homeconnect.about.R
+import co.com.japl.homeconnect.about.util.KindApp
 import co.com.japl.ui.theme.MaterialThemeComposeUI
+import androidx.core.net.toUri
 
 @Composable
 fun About(
@@ -52,14 +38,15 @@ fun About(
     val linkWebSiteApp = stringResource(id = R.string.url_website)
     val context = LocalContext.current
     val color = MaterialTheme.colorScheme.onBackground
-    val description =
-        if (applicationId.lowercase().contains("myapplication")) {
-            R.string.description_finances
-        } else if (applicationId.lowercase().contains("alameda181")) {
-            R.string.description_alameda181
-        } else {
-            R.string.urtss_label_title
-        }
+    val kindApp = KindApp.get(applicationId)
+    val description = when(kindApp){
+        KindApp.FINANCES ->  R.string.description_finances
+        KindApp.ALAMEDA181 -> R.string.description_alameda181
+        KindApp.TORRES_SAN_SEBASTIAN -> R.string.description_tss
+        KindApp.RIDE_CONNECT -> R.string.description_ride_connect
+        KindApp.SYNAPSEFIT -> R.string.description_synapsefit
+        else -> R.string.description_finances
+    }
 
     Column(
         verticalArrangement = Arrangement.Top,
@@ -71,7 +58,7 @@ fun About(
     ) {
         Row {
             Column {
-                if (applicationId.lowercase().contains("myapplication")) {
+                if (KindApp.FINANCES == kindApp) {
                     Owner(
                         logo = R.drawable.finanzaspersonales,
                         descriptionLogo = R.string.fiances,
@@ -81,7 +68,7 @@ fun About(
                                 .padding(top = 5.dp),
                     )
                 }
-                if (applicationId.lowercase().contains("alameda181")) {
+                if (KindApp.ALAMEDA181 == kindApp) {
                     Owner(
                         logo = R.drawable.img,
                         descriptionLogo = R.string.alameda181,
@@ -91,7 +78,7 @@ fun About(
                                 .padding(top = 5.dp),
                     )
                 }
-                if (applicationId.lowercase().contains("torressansebastian")) {
+                if (KindApp.TORRES_SAN_SEBASTIAN == kindApp) {
                     Owner(
                         logo = R.drawable.torressansebastian_logo,
                         descriptionLogo = R.string.urtss,
@@ -101,7 +88,7 @@ fun About(
                                 .padding(top = 5.dp),
                     )
                 }
-                if (applicationId.lowercase().contains("synapsefit")) {
+                if (KindApp.SYNAPSEFIT == kindApp) {
                     Owner(
                         logo = R.drawable.synapsefit,
                         descriptionLogo = R.string.synapsefit,
@@ -111,7 +98,7 @@ fun About(
                                 .padding(top = 5.dp),
                     )
                 }
-                if (applicationId.lowercase().contains("ride_connect")) {
+                if (KindApp.RIDE_CONNECT == kindApp) {
                     Owner(
                         logo = R.drawable.ride_connect,
                         descriptionLogo = R.string.ride_connect,
@@ -123,7 +110,7 @@ fun About(
                 }
 
                 Button(onClick = {
-                    val uri = Uri.parse(linkWebSiteApp)
+                    val uri = linkWebSiteApp.toUri()
                     val intent = Intent(Intent.ACTION_VIEW, uri)
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                     context.startActivity(intent)
@@ -157,7 +144,6 @@ fun About(
         AppBrothers(applicationId)
     }
 }
-
 
 @RequiresApi(Build.VERSION_CODES.S)
 @Preview(
