@@ -12,5 +12,9 @@ enum class KindApp (private val app: String) {
             entries.find { key ->
                 key.app.contains(applicationId.lowercase())
             }
+        fun getDifferent(applicationId: String): KindApp? =
+            entries.find { key ->
+                !key.app.contains(applicationId.lowercase())
+            }
     }
 }

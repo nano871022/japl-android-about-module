@@ -18,7 +18,7 @@ import co.com.japl.homeconnect.about.ui.CardTorres
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun AppBrothers(applicationId: String) {
-    val appsToDisplay = KindApp.get(applicationId)
+    val appsToDisplay = KindApp.getDifferent(applicationId)
 
     FlowRow(
         horizontalArrangement = Arrangement.spacedBy(5.dp),
