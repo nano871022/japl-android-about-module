@@ -35,10 +35,10 @@ fun About(
     versionDetail: String,
     applicationId: String,
 ) {
-    val linkWebSiteApp = stringResource(id = R.string.url_website)
+    val kindApp = KindApp.get(applicationId)
+    val linkWebSiteApp = stringResource(id = kindApp?.linkweb?:R.string.url_website_finances)
     val context = LocalContext.current
     val color = MaterialTheme.colorScheme.onBackground
-    val kindApp = KindApp.get(applicationId)
     val description = when(kindApp){
         KindApp.FINANCES ->  R.string.description_finances
         KindApp.ALAMEDA181 -> R.string.description_alameda181
