@@ -30,7 +30,7 @@ fun AppBrothers(applicationId: String) {
                 .widthIn(min = 80.dp)
                 .weight(1f)
         ) {
-            appsToDisplay?.let {
+            appsToDisplay.forEach {
                 when (it) {
                     KindApp.FINANCES -> CardFinanzas()
                     KindApp.ALAMEDA181 -> CardCRAlameda181()
