@@ -28,13 +28,16 @@ jobs:
           java-version: '17'
           cache: 'gradle'
 
-      - name: Make gradlew executable
-        run: chmod +x gradlew
-
       - name: Run Android Lint
         id: run-lint
         continue-on-error: true
-        run: ./gradlew lintDebug --continue
+        run: |
+          if [ -f "./gradlew" ]; then
+            chmod +x gradlew
+            ./gradlew lintDebug --continue
+          else
+            gradle lintDebug --continue
+          fi
 
       - name: Upload Lint Reports Artifact
         if: steps.run-lint.outcome == 'failure'

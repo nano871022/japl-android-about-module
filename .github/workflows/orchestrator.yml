@@ -30,19 +30,19 @@ jobs:
 
       - name: Download Test Artifacts
         if: needs.test.result == 'failure'
+        continue-on-error: true
         uses: actions/download-artifact@v4
         with:
           name: unit-test-report
           path: artifacts/test
-          continue-on-error: true
 
       - name: Download Lint Artifacts
         if: needs.lint.result == 'failure'
+        continue-on-error: true
         uses: actions/download-artifact@v4
         with:
           name: lint-report
           path: artifacts/lint
-          continue-on-error: true
 
       - name: Build and Publish Error Report
         uses: actions/github-script@v7
@@ -90,7 +90,7 @@ jobs:
                 }
               }
               if (!lintFound) {
-                report += `Lint failed. Please check build logs/artifacts for details.\n\n`;
+                report += `Lint failed. Please check workflow run logs for detailed build failure output.\n\n`;
               }
             }
 
@@ -111,7 +111,7 @@ jobs:
                 }
               }
               if (!testFound) {
-                report += `Unit tests failed. Please check build logs/artifacts for details.\n\n`;
+                report += `Unit tests failed. Please check workflow run logs for detailed build failure output.\n\n`;
               }
             }
 

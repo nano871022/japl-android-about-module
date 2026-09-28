@@ -11,9 +11,9 @@ This repository is a **reusable Android library** (`com.android.library`) shared
 ## Guidelines for AI Agents & Developers
 - **Backwards Compatibility**: Do not modify public function signatures or Compose UI entrypoints without explicit instructions or version deprecation strategies.
 - **Local Verification**:
-  - Run unit tests: `./gradlew test` or `./gradlew testDebugUnitTest`
-  - Run Android Lint: `./gradlew lint` or `./gradlew lintDebug`
-  - Verify build: `./gradlew assembleDebug`
+  - Run unit tests: `./gradlew test` (or `gradle testDebugUnitTest`)
+  - Run Android Lint: `./gradlew lint` (or `gradle lintDebug`)
+  - Verify build: `./gradlew assembleDebug` (or `gradle assembleDebug`)
 - **Error Handling & Workflows**:
   - CI workflows (`.github/workflows`) execute lint and unit test checks on Pull Requests and direct pushes to `main`.
   - On PR failures, combined reports for lint and test errors will be posted as comments on the PR.

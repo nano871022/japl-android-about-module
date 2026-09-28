@@ -28,13 +28,16 @@ jobs:
           java-version: '17'
           cache: 'gradle'
 
-      - name: Make gradlew executable
-        run: chmod +x gradlew
-
       - name: Run Unit Tests
         id: run-tests
         continue-on-error: true
-        run: ./gradlew testDebugUnitTest --continue
+        run: |
+          if [ -f "./gradlew" ]; then
+            chmod +x gradlew
+            ./gradlew testDebugUnitTest --continue
+          else
+            gradle testDebugUnitTest --continue
+          fi
 
       - name: Upload Test Reports Artifact
         if: steps.run-tests.outcome == 'failure'
