@@ -55,7 +55,7 @@ jobs:
             const testResult = '${{ needs.test.result }}';
             const lintResult = '${{ needs.lint.result }}';
 
-            let report = `## 🚨 CI Check Failures\n\n`;
+            let report = `@jules\n\n## 🚨 CI Check Failures\n\n`;
             report += `Status Summary:\n`;
             report += `- **Unit Tests**: ${testResult === 'failure' ? '❌ Failed' : '✅ Passed'}\n`;
             report += `- **Android Lint**: ${lintResult === 'failure' ? '❌ Failed' : '✅ Passed'}\n\n`;
@@ -86,15 +86,15 @@ jobs:
                 if (issueMatches.length > 0) {
                   lintFound = true;
                   const sample = issueMatches.slice(0, 10).join('\n');
-                  report += `<details><summary>Lint Issues (${issueMatches.length} issues found in XML report)</summary>\n\n\`\`\`xml\n${sample.substring(0, 3000)}\n\`\`\`\n</details>\n\n`;
+                  report += `<details><summary>Lint Issues (${issueMatches.length} issues found in XML report)</summary>\n\n\`\`\`xml\n${sample.substring(0, 4000)}\n\`\`\`\n</details>\n\n`;
                 }
               }
 
               const lintLogFile = 'artifacts/lint/lint-execution.log';
               if (fs.existsSync(lintLogFile)) {
                 const logContent = fs.readFileSync(lintLogFile, 'utf8');
-                const tailLog = logContent.length > 3500 ? logContent.substring(logContent.length - 3500) : logContent;
-                report += `<details><summary>Console Execution Log Output (Lint)</summary>\n\n\`\`\`text\n${tailLog}\n\`\`\`\n</details>\n\n`;
+                const tailLog = logContent.length > 10000 ? logContent.substring(logContent.length - 10000) : logContent;
+                report += `<details open><summary>Console Execution Log Output (Lint)</summary>\n\n\`\`\`text\n${tailLog}\n\`\`\`\n</details>\n\n`;
               } else if (!lintFound) {
                 report += `Lint failed. Please check workflow run logs for detailed build failure output.\n\n`;
               }
@@ -112,7 +112,7 @@ jobs:
                   const failedCases = failureMatches.filter(tc => tc.includes('<failure') || tc.includes('<error'));
                   if (failedCases.length > 0) {
                     const sample = failedCases.slice(0, 10).join('\n');
-                    report += `<details><summary>Failed Tests (${failedCases.length} tests failed in XML report)</summary>\n\n\`\`\`xml\n${sample.substring(0, 3000)}\n\`\`\`\n</details>\n\n`;
+                    report += `<details><summary>Failed Tests (${failedCases.length} tests failed in XML report)</summary>\n\n\`\`\`xml\n${sample.substring(0, 4000)}\n\`\`\`\n</details>\n\n`;
                   }
                 }
               }
@@ -120,8 +120,8 @@ jobs:
               const testLogFile = 'artifacts/test/test-execution.log';
               if (fs.existsSync(testLogFile)) {
                 const logContent = fs.readFileSync(testLogFile, 'utf8');
-                const tailLog = logContent.length > 3500 ? logContent.substring(logContent.length - 3500) : logContent;
-                report += `<details><summary>Console Execution Log Output (Tests)</summary>\n\n\`\`\`text\n${tailLog}\n\`\`\`\n</details>\n\n`;
+                const tailLog = logContent.length > 10000 ? logContent.substring(logContent.length - 10000) : logContent;
+                report += `<details open><summary>Console Execution Log Output (Tests)</summary>\n\n\`\`\`text\n${tailLog}\n\`\`\`\n</details>\n\n`;
               } else if (!testFound) {
                 report += `Unit tests failed. Please check workflow run logs for detailed build failure output.\n\n`;
               }
