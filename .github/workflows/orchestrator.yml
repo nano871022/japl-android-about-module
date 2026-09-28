@@ -55,7 +55,7 @@ jobs:
             const testResult = '${{ needs.test.result }}';
             const lintResult = '${{ needs.lint.result }}';
 
-            let report = `@jules\n\n## 🚨 CI Check Failures\n\n`;
+            let report = `## 🚨 CI Check Failures\n\n`;
             report += `Status Summary:\n`;
             report += `- **Unit Tests**: ${testResult === 'failure' ? '❌ Failed' : '✅ Passed'}\n`;
             report += `- **Android Lint**: ${lintResult === 'failure' ? '❌ Failed' : '✅ Passed'}\n\n`;
