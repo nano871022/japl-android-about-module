@@ -32,11 +32,12 @@ jobs:
         id: run-tests
         continue-on-error: true
         run: |
+          mkdir -p build
           if [ -f "./gradlew" ]; then
             chmod +x gradlew
-            ./gradlew testDebugUnitTest --continue
+            ./gradlew testDebugUnitTest --continue 2>&1 | tee build/test-execution.log
           else
-            gradle testDebugUnitTest --continue
+            gradle testDebugUnitTest --continue 2>&1 | tee build/test-execution.log
           fi
 
       - name: Upload Test Reports Artifact
@@ -45,6 +46,7 @@ jobs:
         with:
           name: unit-test-report
           path: |
+            build/test-execution.log
             build/reports/
             build/test-results/
           if-no-files-found: ignore

@@ -32,11 +32,12 @@ jobs:
         id: run-lint
         continue-on-error: true
         run: |
+          mkdir -p build
           if [ -f "./gradlew" ]; then
             chmod +x gradlew
-            ./gradlew lintDebug --continue
+            ./gradlew lintDebug --continue 2>&1 | tee build/lint-execution.log
           else
-            gradle lintDebug --continue
+            gradle lintDebug --continue 2>&1 | tee build/lint-execution.log
           fi
 
       - name: Upload Lint Reports Artifact
@@ -45,6 +46,7 @@ jobs:
         with:
           name: lint-report
           path: |
+            build/lint-execution.log
             build/reports/
           if-no-files-found: ignore
           retention-days: 7
