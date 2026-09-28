@@ -1,0 +1,51 @@
+name: Reusable Unit Tests
+
+on:
+  workflow_call:
+    outputs:
+      test_outcome:
+        description: "Outcome of the test step (success or failure)"
+        value: ${{ jobs.test.outputs.test_outcome }}
+      test_report_path:
+        description: "Path to test results/reports if failed"
+        value: ${{ jobs.test.outputs.test_report_path }}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    outputs:
+      test_outcome: ${{ steps.run-tests.outcome }}
+      test_report_path: "build/reports/tests/testDebugUnitTest"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
+      - name: Run Unit Tests
+        id: run-tests
+        continue-on-error: true
+        run: ./gradlew testDebugUnitTest --continue
+
+      - name: Upload Test Reports Artifact
+        if: steps.run-tests.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-test-report
+          path: |
+            build/reports/tests/
+            build/test-results/
+          retention-days: 7
+
+      - name: Fail job if unit tests failed
+        if: steps.run-tests.outcome == 'failure'
+        run: exit 1

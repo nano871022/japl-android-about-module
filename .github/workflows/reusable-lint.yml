@@ -1,0 +1,51 @@
+name: Reusable Lint Check
+
+on:
+  workflow_call:
+    outputs:
+      lint_outcome:
+        description: "Outcome of the lint step (success or failure)"
+        value: ${{ jobs.lint.outputs.lint_outcome }}
+      lint_report_path:
+        description: "Path to lint results/reports if failed"
+        value: ${{ jobs.lint.outputs.lint_report_path }}
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    outputs:
+      lint_outcome: ${{ steps.run-lint.outcome }}
+      lint_report_path: "build/reports/lint-results-debug.xml"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
+      - name: Run Android Lint
+        id: run-lint
+        continue-on-error: true
+        run: ./gradlew lintDebug --continue
+
+      - name: Upload Lint Reports Artifact
+        if: steps.run-lint.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: lint-report
+          path: |
+            build/reports/lint-results*
+            build/reports/
+          retention-days: 7
+
+      - name: Fail job if lint failed
+        if: steps.run-lint.outcome == 'failure'
+        run: exit 1
