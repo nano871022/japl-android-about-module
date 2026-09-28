@@ -45,8 +45,9 @@ jobs:
         with:
           name: unit-test-report
           path: |
-            build/reports/tests/
+            build/reports/
             build/test-results/
+          if-no-files-found: ignore
           retention-days: 7
 
       - name: Fail job if unit tests failed

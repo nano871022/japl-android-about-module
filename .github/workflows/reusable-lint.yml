@@ -45,8 +45,8 @@ jobs:
         with:
           name: lint-report
           path: |
-            build/reports/lint-results*
             build/reports/
+          if-no-files-found: ignore
           retention-days: 7
 
       - name: Fail job if lint failed
