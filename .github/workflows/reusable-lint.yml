@@ -30,8 +30,10 @@ jobs:
 
       - name: Run Android Lint
         id: run-lint
+        shell: bash
         continue-on-error: true
         run: |
+          set -o pipefail
           mkdir -p build
           if [ -f "./gradlew" ]; then
             chmod +x gradlew
