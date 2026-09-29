@@ -1,0 +1,53 @@
+name: CI Orchestrator
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  test:
+    uses: ./.github/workflows/reusable-test.yml
+
+  lint:
+    uses: ./.github/workflows/reusable-lint.yml
+
+  report-comment:
+    needs: [test, lint]
+    if: always() && github.event_name == 'pull_request' && (needs.test.result == 'failure' || needs.lint.result == 'failure')
+    permissions:
+      contents: read
+      pull-requests: write
+    uses: ./.github/workflows/reusable-comment.yml
+    with:
+      test_result: ${{ needs.test.result }}
+      lint_result: ${{ needs.lint.result }}
+
+  report-issue:
+    needs: [test, lint]
+    if: always() && github.event_name == 'push' && (needs.test.result == 'failure' || needs.lint.result == 'failure')
+    permissions:
+      contents: read
+      issues: write
+    uses: ./.github/workflows/reusable-issue.yml
+    with:
+      test_result: ${{ needs.test.result }}
+      lint_result: ${{ needs.lint.result }}
+
+  invoke-jules:
+    needs: [test, lint]
+    if: always() && github.event_name == 'workflow_dispatch' && (needs.test.result == 'failure' || needs.lint.result == 'failure')
+    permissions:
+      contents: write
+      pull-requests: write
+    uses: ./.github/workflows/reusable-jules.yml
+    secrets: inherit
+    with:
+      error_log_test: ${{ needs.test.result }}
+      error_log_lint: ${{ needs.lint.result }}
