@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "co.com.japl.homeconnect.about"
-    compileSdk = 35
+    compileSdk = 37
 
     lint {
         baseline = file("lint-baseline.xml")
