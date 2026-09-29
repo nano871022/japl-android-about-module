@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import co.com.japl.homeconnect.about.ui.About
-import co.com.japl.ui.theme.MaterialThemeComposeUI
+import co.com.japl.homeconnect.about.ui.theme.MaterialThemeComposeUI
 
 class AboutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
