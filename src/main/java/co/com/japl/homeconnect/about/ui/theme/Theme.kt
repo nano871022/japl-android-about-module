@@ -1,4 +1,4 @@
-package co.com.japl.ui.theme
+package co.com.japl.homeconnect.about.ui.theme
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable

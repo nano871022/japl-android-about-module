@@ -27,7 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import co.com.japl.homeconnect.about.R
 import co.com.japl.homeconnect.about.util.KindApp
-import co.com.japl.ui.theme.MaterialThemeComposeUI
+import co.com.japl.homeconnect.about.ui.theme.MaterialThemeComposeUI
 import androidx.core.net.toUri
 
 @Composable
