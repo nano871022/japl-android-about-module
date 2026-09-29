@@ -1,0 +1,138 @@
+name: Reusable PR Comment Report
+
+on:
+  workflow_call:
+    inputs:
+      test_result:
+        type: string
+        required: true
+      lint_result:
+        type: string
+        required: true
+
+jobs:
+  report-comment:
+    name: Post PR Failure Comment
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download Test Artifacts
+        if: inputs.test_result == 'failure'
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: unit-test-report
+          path: artifacts/test
+
+      - name: Download Lint Artifacts
+        if: inputs.lint_result == 'failure'
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: lint-report
+          path: artifacts/lint
+
+      - name: Build and Publish PR Comment
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            const testResult = '${{ inputs.test_result }}';
+            const lintResult = '${{ inputs.lint_result }}';
+
+            let report = `@jules\n\n## 🚨 CI Check Failures\n\n`;
+            report += `Status Summary:\n`;
+            report += `- **Unit Tests**: ${testResult === 'failure' ? '❌ Failed' : '✅ Passed'}\n`;
+            report += `- **Android Lint**: ${lintResult === 'failure' ? '❌ Failed' : '✅ Passed'}\n\n`;
+
+            function findFiles(dir, ext) {
+              let results = [];
+              if (!fs.existsSync(dir)) return results;
+              const list = fs.readdirSync(dir);
+              list.forEach(file => {
+                const filePath = path.join(dir, file);
+                const stat = fs.statSync(filePath);
+                if (stat && stat.isDirectory()) {
+                  results = results.concat(findFiles(filePath, ext));
+                } else if (file.endsWith(ext)) {
+                  results.push(filePath);
+                }
+              });
+              return results;
+            }
+
+            if (lintResult === 'failure') {
+              report += `### 🔍 Android Lint Errors\n`;
+              const xmlFiles = findFiles('artifacts/lint', '.xml');
+              let lintFound = false;
+              for (const xmlFile of xmlFiles) {
+                const content = fs.readFileSync(xmlFile, 'utf8');
+                const issueMatches = content.match(/<issue[\s\S]*?<\/issue>/g) || [];
+                if (issueMatches.length > 0) {
+                  lintFound = true;
+                  const sample = issueMatches.slice(0, 10).join('\n');
+                  report += `<details><summary>Lint Issues (${issueMatches.length} issues found in XML report)</summary>\n\n\`\`\`xml\n${sample.substring(0, 4000)}\n\`\`\`\n</details>\n\n`;
+                }
+              }
+
+              const lintLogFile = 'artifacts/lint/lint-execution.log';
+              if (fs.existsSync(lintLogFile)) {
+                const logContent = fs.readFileSync(lintLogFile, 'utf8');
+                const tailLog = logContent.length > 10000 ? logContent.substring(logContent.length - 10000) : logContent;
+                report += `<details open><summary>Console Execution Log Output (Lint)</summary>\n\n\`\`\`text\n${tailLog}\n\`\`\`\n</details>\n\n`;
+              } else if (!lintFound) {
+                report += `Lint failed. Please check workflow run logs for detailed build failure output.\n\n`;
+              }
+            }
+
+            if (testResult === 'failure') {
+              report += `### 🧪 Unit Test Errors\n`;
+              const xmlFiles = findFiles('artifacts/test', '.xml');
+              let testFound = false;
+              for (const xmlFile of xmlFiles) {
+                const content = fs.readFileSync(xmlFile, 'utf8');
+                if (content.includes('<failure') || content.includes('<error')) {
+                  testFound = true;
+                  const failureMatches = content.match(/<testcase[\s\S]*?<\/testcase>/g) || [];
+                  const failedCases = failureMatches.filter(tc => tc.includes('<failure') || tc.includes('<error'));
+                  if (failedCases.length > 0) {
+                    const sample = failedCases.slice(0, 10).join('\n');
+                    report += `<details><summary>Failed Tests (${failedCases.length} tests failed in XML report)</summary>\n\n\`\`\`xml\n${sample.substring(0, 4000)}\n\`\`\`\n</details>\n\n`;
+                  }
+                }
+              }
+
+              const testLogFile = 'artifacts/test/test-execution.log';
+              if (fs.existsSync(testLogFile)) {
+                const logContent = fs.readFileSync(testLogFile, 'utf8');
+                const tailLog = logContent.length > 10000 ? logContent.substring(logContent.length - 10000) : logContent;
+                report += `<details open><summary>Console Execution Log Output (Tests)</summary>\n\n\`\`\`text\n${tailLog}\n\`\`\`\n</details>\n\n`;
+              } else if (!testFound) {
+                report += `Unit tests failed. Please check workflow run logs for detailed build failure output.\n\n`;
+              }
+            }
+
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const issue_number = context.payload.pull_request ? context.payload.pull_request.number : null;
+
+            if (issue_number) {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number,
+                body: report
+              });
+              core.setFailed('CI checks (tests and/or lint) failed. PR comment posted.');
+            } else {
+              core.setFailed('CI checks failed, but no PR context found to post comment.');
+            }
