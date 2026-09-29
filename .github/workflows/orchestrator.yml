@@ -21,6 +21,9 @@ jobs:
   report-comment:
     needs: [test, lint]
     if: always() && github.event_name == 'pull_request' && (needs.test.result == 'failure' || needs.lint.result == 'failure')
+    permissions:
+      contents: read
+      pull-requests: write
     uses: ./.github/workflows/reusable-comment.yml
     with:
       test_result: ${{ needs.test.result }}
@@ -29,6 +32,9 @@ jobs:
   report-issue:
     needs: [test, lint]
     if: always() && github.event_name == 'push' && (needs.test.result == 'failure' || needs.lint.result == 'failure')
+    permissions:
+      contents: read
+      issues: write
     uses: ./.github/workflows/reusable-issue.yml
     with:
       test_result: ${{ needs.test.result }}
@@ -37,6 +43,9 @@ jobs:
   invoke-jules:
     needs: [test, lint]
     if: always() && github.event_name == 'workflow_dispatch' && (needs.test.result == 'failure' || needs.lint.result == 'failure')
+    permissions:
+      contents: write
+      pull-requests: write
     uses: ./.github/workflows/reusable-jules.yml
     secrets: inherit
     with:
